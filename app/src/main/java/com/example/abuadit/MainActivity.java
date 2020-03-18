@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startProg() {
-        Intent intent = new Intent(this,HomeScreen.class);
+        Intent intent = new Intent(this,LoginOption.class);
         startActivity(intent);
-//        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
         finish();
     }
 }

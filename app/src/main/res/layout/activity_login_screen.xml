@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/loginColor"
     tools:context=".LoginScreen">
 
     <LinearLayout
@@ -33,6 +34,7 @@
             android:src="@drawable/abuadlogo"
             android:textAlignment="center" />
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/simpleregno"
 
@@ -51,6 +53,7 @@
                 android:drawablePadding="8dp"
                 android:inputType="text"
                 android:lines="1"
+                android:text="13u2314"
                 android:longClickable="true"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
@@ -75,6 +78,7 @@
                 android:drawablePadding="8dp"
                 android:inputType="textPassword"
                 android:lines="1"
+                android:text="12345"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
                 android:textSize="16dp" />
@@ -85,14 +89,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="@color/colorAbuad"
-            android:drawableLeft="@android:drawable/ic_media_previous"
-            android:drawableRight="@android:drawable/ic_media_next"
-            android:padding="15dp"
-            android:text="CLICK TO LOGIN"
+            android:background="@drawable/buttonshape"
+            android:padding="10dp"
+            android:text="LOGIN"
             android:textColor="@color/fairwhite"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 

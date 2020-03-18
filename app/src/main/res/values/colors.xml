@@ -7,4 +7,8 @@
     <color name="colorAbuad">#2d548d</color>
     <color name="colorBlack">#070707</color>
     <color name="fairwhite">#F0F0F0 </color>
+    <color name="colorGreen">#037427</color>
+    <color name="colorblue">#7ed6df</color>
+    <color name="loginColor">#dff9fb</color>
+    <color name="titleColor">#95afc0</color>
 </resources>

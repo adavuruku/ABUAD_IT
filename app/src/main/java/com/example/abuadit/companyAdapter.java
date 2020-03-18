@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +14,11 @@ import java.util.List;
 
 public class companyAdapter extends RecyclerView.Adapter<companyAdapter.RecyclerHolder>{
     private LayoutInflater inflater;
-    private List<myModels.itfOffice> contacts;
+    private List<myModels.companyModel> contacts;
     private String stat;
     private Context activity;
     private  OnItemClickListener mlistener;
-    public companyAdapter(List<myModels.itfOffice> contacts, Context context, OnItemClickListener listener){
+    public companyAdapter(List<myModels.companyModel> contacts, Context context, OnItemClickListener listener){
         this.activity = context;
         this.inflater = LayoutInflater.from(context);
         this.mlistener = listener;
@@ -41,12 +42,33 @@ public class companyAdapter extends RecyclerView.Adapter<companyAdapter.Recycler
     public void onBindViewHolder(RecyclerHolder holder, int position) {
         try {
             int g = holder.getAdapterPosition();
-            myModels.itfOffice contact = contacts.get(g);
-            holder.companyName.setText(contact.getAreaOffice());
-            holder.State.setText(contact.getState() + " State.");
+            myModels.companyModel contact = contacts.get(g);
+            String applicationStatus = contact.getAppStatus();
+            if( applicationStatus==""){
+                holder.appStatus.setVisibility(View.GONE);
+            }else{
+
+                if( applicationStatus.equals("1")){
+                    holder.appStatus.setVisibility(View.VISIBLE);
+                    holder.appStatus.setText("Company Has Approved Your Application");
+                    holder.appStatus.setTextColor(activity.getResources().getColor(R.color.colorGreen));
+                    holder.clickApply.setText("ACCEPT OFFER");
+                }else if(applicationStatus.equals("2")){
+                    holder.appStatus.setVisibility(View.VISIBLE);
+                    holder.appStatus.setText("You Have Accept Application");
+                    holder.appStatus.setTextColor(activity.getResources().getColor(R.color.colorGreen));
+                    holder.clickApply.setVisibility(View.GONE);
+                }else {
+                    holder.appStatus.setVisibility(View.VISIBLE);
+                    holder.appStatus.setText("Pending Application");
+                    holder.clickApply.setVisibility(View.GONE);
+                }
+            }
+            holder.companyName.setText(contact.getCompanyName());
+            holder.State.setText(contact.getLgov() + " / " + contact.getState() + " State.");
             holder.ContactAdd.setText("Contact Add. : " + contact.getContactAdd());
-            holder.Email.setText("Email Add. : " + contact.getEmail());
-            holder.PhoneNo.setText("Phone No. : " + contact.getPhoneNo());
+            holder.Description.setText("Description. : " + contact.getDescription());
+            holder.PhoneNo.setText(contact.getPhoneNo() + " / " + contact.getEmail());
 
             if (position > prevpos) {
                 //you are scrooling down
@@ -70,31 +92,34 @@ public class companyAdapter extends RecyclerView.Adapter<companyAdapter.Recycler
     //create the holder class
     class RecyclerHolder extends RecyclerView.ViewHolder{
         //the view items send here is from custom_row and is received here as itemView
-        TextView companyName, PhoneNo,State,Email,ContactAdd;
+        TextView companyName, PhoneNo,State,Description,ContactAdd,appStatus;
+        Button clickApply;
         public RecyclerHolder(View itemView,final OnItemClickListener listener) {
             super(itemView);
             companyName =  itemView.findViewById(R.id.companyName);
             PhoneNo = itemView.findViewById(R.id.PhoneNo);
-            Email =  itemView.findViewById(R.id.Email);
+            Description =  itemView.findViewById(R.id.description);
             State = itemView.findViewById(R.id.State);
             ContactAdd = itemView.findViewById(R.id.ContactAdd);
+            clickApply = itemView.findViewById(R.id.btnApply);
+            appStatus = itemView.findViewById(R.id.appstatus);
 
-//            PhoneNo.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(listener!=null){
-//                        int position = getAdapterPosition();
-//                        if(position != RecyclerView.NO_POSITION){
-//                            listener.onNameClick(view, position);
-//                        }
-//                    }
-//                }
-//            });
+            clickApply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener!=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onNameClick(view, position);
+                        }
+                    }
+                }
+            });
 
         }
     }
 
-    public void setFilter(ArrayList<myModels.itfOffice> newList){
+    public void setFilter(ArrayList<myModels.companyModel> newList){
         contacts = new ArrayList<>();
         contacts.addAll(newList);
         notifyDataSetChanged();

@@ -13,9 +13,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class dbHelper extends SQLiteOpenHelper {
     // Database Info
     // Database Info
-    public static final String DATABASE_NAME = "NAMSATBULO.db";
-    public static final String DBLOCATION = "/data/data/com.example.atbunamsn/databases/";
-    private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "ABUADOOO.db";
+    public static final String DBLOCATION = "/data/data/com.example.abuadit/databases/";
+    private static final int DATABASE_VERSION = 4;
     private Context mcontext;
     private SQLiteDatabase mdatabase;
 
@@ -27,211 +27,411 @@ public class dbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String CREATE_TABLE_ABUADITINOFRMATION = "CREATE TABLE IF NOT EXISTS " + dbColumnList.abuadItInformation.TABLE_NAME +
+                "(" +
+                dbColumnList.abuadItInformation._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.abuadItInformation.COLUMN_REGNO + " VARCHAR, " +
+                dbColumnList.abuadItInformation.COLUMN_STAFFID + " VARCHAR, " +
+                dbColumnList.abuadItInformation.COLUMN_COMPANYID + " VARCHAR, " +
+                dbColumnList.abuadItInformation.COLUMN_DATESTART + " VARCHAR, " +
+                dbColumnList.abuadItInformation.COLUMN_DATEEND + " VARCHAR, " +
+                dbColumnList.abuadItInformation.COLUMN_DURATION + " VARCHAR " +
+                ")";
 
+        String CREATE_TABLE_ABUADCOMPANY= "CREATE TABLE IF NOT EXISTS " + dbColumnList.abuadCompany.TABLE_NAME +
+                "(" +
+                dbColumnList.abuadCompany._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYDESCRIPTION + " TEXT, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYID + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYPHONE + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYNAME + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYLGOV + " VARCHAR, " +
+                dbColumnList.abuadCompany.COLUMN_COMPANYSTATE + " VARCHAR " +
+                ")";
+
+        String CREATE_TABLE_ABUADNOTICE= "CREATE TABLE IF NOT EXISTS " + dbColumnList.abuadNotice.TABLE_NAME +
+                "(" +
+                dbColumnList.abuadNotice._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.abuadNotice.COLUMN_ID + " VARCHAR, " +
+                dbColumnList.abuadNotice.COLUMN_DESCRIPTION + " TEXT, " +
+                dbColumnList.abuadNotice.COLUMN_TITLE + " TEXT, " +
+                dbColumnList.abuadNotice.COLUMN_AUTHOR + " VARCHAR, " +
+                dbColumnList.abuadNotice.COLUMN_STATUS + " VARCHAR, " +
+                dbColumnList.abuadNotice.COLUMN_NOTICEDATE + " VARCHAR " +
+                ")";
+        String CREATE_TABLE_ABUADLECTURER= "CREATE TABLE IF NOT EXISTS " + dbColumnList.abuadLecturer.TABLE_NAME +
+                "(" +
+                dbColumnList.abuadLecturer._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.abuadLecturer.COLUMN_FULLNAME + " VARCHAR, " +
+                dbColumnList.abuadLecturer.COLUMN_FACULTY + " VARCHAR, " +
+                dbColumnList.abuadLecturer.COLUMN_DEPARTMENT + " VARCHAR, " +
+                dbColumnList.abuadLecturer.COLUMN_EMAIL + " VARCHAR, " +
+                dbColumnList.abuadLecturer.COLUMN_PHONE + " VARCHAR, " +
+                dbColumnList.abuadLecturer.COLUMN_STAFFADDRESS + " TEXT, " +
+                dbColumnList.abuadLecturer.COLUMN_STAFFID + " VARCHAR " +
+                ")";
+        String CREATE_TABLE_ABUADSTUDENT= "CREATE TABLE IF NOT EXISTS " + dbColumnList.abuadstudent.TABLE_NAME +
+                "(" +
+                dbColumnList.abuadstudent._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.abuadstudent.COLUMN_FULLNAME + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_FACULTY + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_DEPARTMENT + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_EMAIL + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_PHONE + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_GENDER + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_LEVEL + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_STATE + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_LGOV + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_MODE + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_DEGREE + " VARCHAR, " +
+                dbColumnList.abuadstudent.COLUMN_CONTACTADD + " TEXT, " +
+                dbColumnList.abuadstudent.COLUMN_REGNO + " VARCHAR " +
+                ")";
+        String CREATE_TABLE_APPLICATIONLIST= "CREATE TABLE IF NOT EXISTS " + dbColumnList.applicationList.TABLE_NAME +
+                "(" +
+                dbColumnList.applicationList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.applicationList.COLUMN_COMPANYID + " VARCHAR, " +
+                dbColumnList.applicationList.COLUMN_REGNO + " VARCHAR, " +
+                dbColumnList.applicationList.COLUMN_ACCEPTSTATUS + " VARCHAR " +
+                ")";
+        String CREATE_TABLE_REGISTERLIST= "CREATE TABLE IF NOT EXISTS " + dbColumnList.registerList.TABLE_NAME +
+                "(" +
+                dbColumnList.registerList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                dbColumnList.registerList.COLUMN_RECORDID + " VARCHAR, " +
+                dbColumnList.registerList.COLUMN_RECORDTYPE + " VARCHAR, " +
+                dbColumnList.registerList.COLUMN_REGNO + " VARCHAR, " +
+                dbColumnList.registerList.COLUMN_DATE + " TEXT, " +
+                dbColumnList.registerList.COLUMN_COMPANYID+ " VARCHAR " +
+                ")";
+
+        String CREATE_TABLE_PROFILEPICS= "CREATE TABLE IF NOT EXISTS " + dbColumnList.userProfilePics.TABLE_NAME +
+                "(" +
+                    dbColumnList.registerList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                    dbColumnList.userProfilePics.COLUMN_REGNO + " VARCHAR, " +
+                    dbColumnList.userProfilePics.COLUMN_PROFILEPICS + " blob " +
+                ")";
+
+        sqLiteDatabase.execSQL(CREATE_TABLE_ABUADITINOFRMATION);
+        sqLiteDatabase.execSQL(CREATE_TABLE_ABUADCOMPANY);
+        sqLiteDatabase.execSQL(CREATE_TABLE_ABUADNOTICE);
+        sqLiteDatabase.execSQL(CREATE_TABLE_ABUADLECTURER);
+        sqLiteDatabase.execSQL(CREATE_TABLE_ABUADSTUDENT);
+        sqLiteDatabase.execSQL(CREATE_TABLE_APPLICATIONLIST);
+        sqLiteDatabase.execSQL(CREATE_TABLE_REGISTERLIST);
+        sqLiteDatabase.execSQL(CREATE_TABLE_PROFILEPICS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userDetails.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userPhone.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userLecturer.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userCourse.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userBest.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userPics.TABLE_NAME);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.myAccount.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.abuadItInformation.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.abuadCompany.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.abuadLecturer.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.abuadNotice.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.abuadstudent.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.applicationList.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.registerList.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbColumnList.userProfilePics.TABLE_NAME);
             //recreate the tables
             onCreate(sqLiteDatabase);
         }
     }
 
-    public void openDatabase(){
-        String dbpath = mcontext.getDatabasePath(DATABASE_NAME).getPath();
-        if(mdatabase != null && mdatabase.isOpen()){
-            return;
-        }
-        mdatabase = SQLiteDatabase.openDatabase(dbpath,null,SQLiteDatabase.OPEN_READWRITE);
-    }
-    public void closeDatabase(){
-        if(mdatabase != null){
-            mdatabase.close();
-        }
-    }
 /*******************************************************************/
     /****** USER DETAILS *********************************************/
-//search all user by department
-    public Cursor getLogin(String userName, String userPassword){
-        openDatabase();
-        SQLiteDatabase database = getReadableDatabase();
-        return database.query(dbColumnList.userDetails.TABLE_NAME,
-                null,
-                dbColumnList.userDetails.COLUMN_REGNO +" = ? AND " + dbColumnList.userDetails.COLUMN_PASSWORD +" = ?",
-                new String[]{userName,userPassword},
-                null,
-                null,
-                null);
-    }
-    public Cursor getAllUser(){
-        openDatabase();
-        SQLiteDatabase database = getReadableDatabase();
-        return database.query(dbColumnList.userDetails.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-    }
 
-    //search user by id
-    public Cursor getDetails(String searchField, String contentSearch){
-        openDatabase();
+    //***********************************************************************
+    public Cursor verifyCompanyExist(String companyId){
         SQLiteDatabase database = getReadableDatabase();
-        return database.query(dbColumnList.userDetails.TABLE_NAME,
-                null,
-                searchField +" = ?",
-                new String[]{contentSearch},
-                null,
-                null,
-                null);
+        String sql = "SELECT * FROM "+dbColumnList.abuadCompany.TABLE_NAME + " WHERE "+dbColumnList.abuadCompany.COLUMN_COMPANYID +"= '" + companyId +"' Limit 1";
+        return database.rawQuery(sql, null);
     }
-    //Insert details
-    public void addNewDetails(String userDept, String userBestMoment,String userCLgov,String userCPermAdd,String userCState,String userEmail,
-                              String userGender,String userLevel,String userLgov,String fullName,String userPermAdd,String userQoute,String userRegNo,String userReligion,
-                              String userId,String userState,String password) {
-        openDatabase();
-        // Create and/or open the database for writing
+    public void SaveCompanyInformation(String companyName, String companyPhone,String companyEmail, String companyAddress,
+                           String companyDescription, String companyState,String companyLocalGov, String companyId){
+//        openDatabase();
         SQLiteDatabase database = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(dbColumnList.userDetails.COLUMN_DEPT, userDept);
-        cv.put(dbColumnList.userDetails.COLUMN_BESTMOMENT, userBestMoment);
-        cv.put(dbColumnList.userDetails.COLUMN_CLGOV, userCLgov);
-        cv.put(dbColumnList.userDetails.COLUMN_CPERMADD, userCPermAdd);
-        cv.put(dbColumnList.userDetails.COLUMN_CSTATE, userCState);
-        cv.put(dbColumnList.userDetails.COLUMN_EMAIL, userEmail);
-        cv.put(dbColumnList.userDetails.COLUMN_GENDER, userGender);
-        cv.put(dbColumnList.userDetails.COLUMN_LEVEL, userLevel);
-        cv.put(dbColumnList.userDetails.COLUMN_LGOV, userLgov);
-        cv.put(dbColumnList.userDetails.COLUMN_NAME, fullName);
-        cv.put(dbColumnList.userDetails.COLUMN_PERMADD, userPermAdd);
-        cv.put(dbColumnList.userDetails.COLUMN_QOUTE, userQoute);
-        cv.put(dbColumnList.userDetails.COLUMN_REGNO, userRegNo);
-        cv.put(dbColumnList.userDetails.COLUMN_RELIGION, userReligion);
-        cv.put(dbColumnList.userDetails.COLUMN_USERID, userId);
-        cv.put(dbColumnList.userDetails.COLUMN_STATE, userState);
-        cv.put(dbColumnList.userDetails.COLUMN_PASSWORD, password);
-        //cv.put(dbColumnList.userDetails.COLUMN_PICS, byteArray);
-        database.insert(dbColumnList.userDetails.TABLE_NAME,null,cv);
-    }
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYID, companyId);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYNAME, companyName);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYSTATE, companyState);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYLGOV, companyLocalGov);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYPHONE, companyPhone);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS, companyAddress);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYDESCRIPTION, companyDescription);
+        cv.put(dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL, companyEmail);
 
-    //Update details
-    public void updateDetails(String userDept, String userBestMoment,String userCLgov,String userCPermAdd,String userCState,String userEmail,
-                              String userGender,String userLevel,String userLgov,String fullName,String userPermAdd,String userQoute,String userRegNo,String userReligion,
-                              String userId,String userState,String password) {
-        openDatabase();
-        // Create and/or open the database for writing
-        SQLiteDatabase database = getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(dbColumnList.userDetails.COLUMN_DEPT, userDept);
-        cv.put(dbColumnList.userDetails.COLUMN_BESTMOMENT, userBestMoment);
-        cv.put(dbColumnList.userDetails.COLUMN_CLGOV, userCLgov);
-        cv.put(dbColumnList.userDetails.COLUMN_CPERMADD, userCPermAdd);
-        cv.put(dbColumnList.userDetails.COLUMN_CSTATE, userCState);
-        cv.put(dbColumnList.userDetails.COLUMN_EMAIL, userEmail);
-        cv.put(dbColumnList.userDetails.COLUMN_GENDER, userGender);
-        cv.put(dbColumnList.userDetails.COLUMN_LEVEL, userLevel);
-        cv.put(dbColumnList.userDetails.COLUMN_LGOV, userLgov);
-        cv.put(dbColumnList.userDetails.COLUMN_NAME, fullName);
-        cv.put(dbColumnList.userDetails.COLUMN_PERMADD, userPermAdd);
-        cv.put(dbColumnList.userDetails.COLUMN_QOUTE, userQoute);
-        cv.put(dbColumnList.userDetails.COLUMN_REGNO, userRegNo);
-        cv.put(dbColumnList.userDetails.COLUMN_RELIGION, userReligion);
-        cv.put(dbColumnList.userDetails.COLUMN_STATE, userState);
-        cv.put(dbColumnList.userDetails.COLUMN_PASSWORD, password);
-        // cv.put(dbColumnList.userDetails.COLUMN_PICS, byteArray);
-        database.update(dbColumnList.userDetails.TABLE_NAME, cv,dbColumnList.userDetails.COLUMN_USERID + "= ?", new String[]{userId});
-        // database.insert(dbColumnList.userDetails.TABLE_NAME,null,cv);
+        Cursor cursor = verifyCompanyExist(companyId);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.abuadCompany.TABLE_NAME, cv, dbColumnList.abuadCompany.COLUMN_COMPANYID + "= ?", new String[]{companyId});
+        }else{
+            database.insert(dbColumnList.abuadCompany.TABLE_NAME,null,cv);
+        }
+//        closeDatabase();
     }
-
-    /*******************************************************************/
-    public void insertForPics(String userID,byte[] insertValue){
-        openDatabase();
-        SQLiteDatabase database = getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(dbColumnList.userPics.COLUMN_USERID, userID);
-        cv.put(dbColumnList.userPics.COLUMN_PICS, insertValue);
-        database.insert(dbColumnList.userPics.TABLE_NAME,null,cv);
-    }
-
-    public void updateForPics(String userID,byte[] insertValue){
-        openDatabase();
-        SQLiteDatabase database = getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(dbColumnList.userPics.COLUMN_PICS, insertValue);
-        database.update(dbColumnList.userPics.TABLE_NAME,cv,dbColumnList.userPics.COLUMN_USERID + " =?",
-                new String[]{userID});
-    }
-
-    public Cursor searchForPics(String userID){
-        openDatabase();
+    public Cursor getAllCompany(){
+        //    openDatabase();
         SQLiteDatabase database = getReadableDatabase();
-        return database.query(dbColumnList.userPics.TABLE_NAME,
+        return database.query(dbColumnList.registerList.TABLE_NAME,
                 null,
-                dbColumnList.userPics.COLUMN_USERID + " =?",
-                new String[]{userID},
+                null,
+                null,
                 null,
                 null,
                 null);
     }
 
-
-    /****** SEARCH FOR BEST FRIENDS,BEST COURSES, BEST LECTURER, BEST PHONES STATRT*********************************************/
-//get all multiple other tables
-    public Cursor getAllMultiple(String TableName, String fieldSearch1,String fieldSearch2, String value1,String value2){
-        openDatabase();
+    public Cursor getACompany(String companyID){
         SQLiteDatabase database = getReadableDatabase();
-        return database.query(TableName,
+        return database.query(dbColumnList.abuadCompany.TABLE_NAME,
                 null,
-                fieldSearch1 + " = ? AND " + fieldSearch2 + " = ?",
-                new String[]{value1,value2},
+                dbColumnList.abuadCompany.COLUMN_COMPANYID +" = ? Limit 1",
+                new String[]{companyID},
+                null,
+                null,null);
+    }
+
+    //*******************Student Start****************************************************
+
+    public Cursor verifyStudentExist(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.abuadstudent.TABLE_NAME + " WHERE "+dbColumnList.abuadstudent.COLUMN_REGNO +"= '" + regno +"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveStudentInformation(String regno, String fullname,
+                                         String faculty, String department,String phone, String email,
+                                         String contactAddress, String gender,String degree, String mode,
+                                         String itState, String itLgov,String itLevel){
+//        openDatabase();
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.abuadstudent.COLUMN_REGNO, regno);
+        cv.put(dbColumnList.abuadstudent.COLUMN_FULLNAME, fullname);
+        cv.put(dbColumnList.abuadstudent.COLUMN_FACULTY, faculty);
+        cv.put(dbColumnList.abuadstudent.COLUMN_DEPARTMENT, department);
+        cv.put(dbColumnList.abuadstudent.COLUMN_MODE, mode);
+        cv.put(dbColumnList.abuadstudent.COLUMN_DEGREE, degree);
+        cv.put(dbColumnList.abuadstudent.COLUMN_STATE, itState);
+        cv.put(dbColumnList.abuadstudent.COLUMN_LGOV, itLgov);
+        cv.put(dbColumnList.abuadstudent.COLUMN_LEVEL, itLevel);
+        cv.put(dbColumnList.abuadstudent.COLUMN_GENDER, gender);
+        cv.put(dbColumnList.abuadstudent.COLUMN_PHONE, phone);
+        cv.put(dbColumnList.abuadstudent.COLUMN_EMAIL, email);
+        cv.put(dbColumnList.abuadstudent.COLUMN_CONTACTADD, contactAddress);
+
+        Cursor cursor = verifyStudentExist(regno);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.abuadstudent.TABLE_NAME, cv, dbColumnList.abuadstudent.COLUMN_REGNO + "= ?", new String[]{regno});
+        }else{
+            database.insert(dbColumnList.abuadstudent.TABLE_NAME,null,cv);
+        }
+//        closeDatabase();
+    }
+    public Cursor getAStudent(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadstudent.TABLE_NAME,
+                null,
+                dbColumnList.abuadstudent.COLUMN_REGNO +" = ? Limit 1",
+                new String[]{regno},
+                null,
+                null,null);
+    }
+    //*********************************LECTURERS*************************************************
+
+
+    public Cursor verifyLecturerExist(String staffid){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.abuadLecturer.TABLE_NAME + " WHERE "+dbColumnList.abuadLecturer.COLUMN_STAFFID +"= '" + staffid +"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveLecturerInformation(String staffid, String fullname,
+                                         String faculty, String department,String phone, String email,String staffaddress){
+//        openDatabase();
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.abuadLecturer.COLUMN_STAFFID, staffid);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_FULLNAME, fullname);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_FACULTY, faculty);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_DEPARTMENT, department);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_STAFFADDRESS, staffaddress);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_EMAIL, email);
+        cv.put(dbColumnList.abuadLecturer.COLUMN_PHONE, phone);
+
+        Cursor cursor = verifyLecturerExist(staffid);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.abuadLecturer.TABLE_NAME, cv, dbColumnList.abuadLecturer.COLUMN_STAFFID + "= ?", new String[]{staffid});
+        }else{
+            database.insert(dbColumnList.abuadLecturer.TABLE_NAME,null,cv);
+        }
+//        closeDatabase();
+    }
+    public Cursor getALecturerInfo(String staffid){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadLecturer.TABLE_NAME,
+                null,
+                dbColumnList.abuadLecturer.COLUMN_STAFFID +" = ? Limit 1",
+                new String[]{staffid},
+                null,
+                null,null);
+    }
+
+    //*********************** IT INFORMATION ***********************************************************
+
+    public Cursor verifyInformationExist(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.abuadItInformation.TABLE_NAME + " WHERE "+dbColumnList.abuadItInformation.COLUMN_REGNO +"= '" + regno +"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveITInformation(String regno,String startDate, String endDate,String duration, String staffid,
+                                          String companyId){
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.abuadItInformation.COLUMN_REGNO, regno);
+        cv.put(dbColumnList.abuadItInformation.COLUMN_DATESTART, startDate);
+        cv.put(dbColumnList.abuadItInformation.COLUMN_DATEEND, endDate);
+        cv.put(dbColumnList.abuadItInformation.COLUMN_COMPANYID, companyId);
+        cv.put(dbColumnList.abuadItInformation.COLUMN_STAFFID, staffid);
+        cv.put(dbColumnList.abuadItInformation.COLUMN_DURATION, duration);
+
+        Cursor cursor = verifyInformationExist(regno);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.abuadItInformation.TABLE_NAME, cv, dbColumnList.abuadItInformation.COLUMN_REGNO + "= ?", new String[]{regno});
+        }else{
+            database.insert(dbColumnList.abuadItInformation.TABLE_NAME,null,cv);
+        }
+    }
+    public Cursor getAStudentItInfo(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadItInformation.TABLE_NAME,
+                null,
+                dbColumnList.abuadItInformation.COLUMN_REGNO +" = ? Limit 1",
+                new String[]{regno},
+                null,
+                null,null);
+    }
+
+//    *************************************************************************
+//*********************** NOTICE ***********************************************************
+
+    public Cursor verifyNoticeExist(String noticeid){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.abuadNotice.TABLE_NAME + " WHERE "+dbColumnList.abuadNotice.COLUMN_ID +"= '" + noticeid +"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveNotice(String noticeid,String noticedesc, String author,String title, String date, String status){
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.abuadNotice.COLUMN_ID, noticeid);
+        cv.put(dbColumnList.abuadNotice.COLUMN_TITLE, title);
+        cv.put(dbColumnList.abuadNotice.COLUMN_DESCRIPTION, noticedesc);
+        cv.put(dbColumnList.abuadNotice.COLUMN_NOTICEDATE, date);
+        cv.put(dbColumnList.abuadNotice.COLUMN_AUTHOR, author);
+        cv.put(dbColumnList.abuadNotice.COLUMN_STATUS, status);
+
+        Cursor cursor = verifyNoticeExist(noticeid);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.abuadNotice.TABLE_NAME, cv, dbColumnList.abuadNotice.COLUMN_ID + " = ?", new String[]{noticeid});
+        }else{
+            database.insert(dbColumnList.abuadNotice.TABLE_NAME,null,cv);
+        }
+    }
+    public Cursor getANotice(String noticeId){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadNotice.TABLE_NAME,
+                null,
+                dbColumnList.abuadNotice.COLUMN_ID +" = ?  AND "+ dbColumnList.abuadNotice.COLUMN_STATUS + " = ? Limit 1",
+                new String[]{noticeId,"0"},
+                null,
+                null,null);
+    }
+
+    public Cursor getAllNotice(){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadNotice.TABLE_NAME,
+                null,
+                 dbColumnList.abuadNotice.COLUMN_STATUS + " = ?",
+                new String[]{"0"},
                 null,
                 null,
                 null);
     }
 
 
-    public Cursor getAllSingle(String TableName, String fieldSearch1, String value1){
-        openDatabase();
+
+//    **************************PROFILE PICS********************************
+
+
+    public Cursor verifyImageExist(String regno){
         SQLiteDatabase database = getReadableDatabase();
-        return database.query(TableName,
-                null,
-                fieldSearch1 + " = ?" ,
-                new String[]{value1},
-                null,
-                null,
-                null);
+        String sql = "SELECT * FROM "+dbColumnList.userProfilePics.TABLE_NAME + " WHERE "+dbColumnList.userProfilePics.COLUMN_REGNO +"= '" + regno +"' Limit 1";
+        return database.rawQuery(sql, null);
     }
-
-    /****** UPDATE FOR BEST FRIENDS,BEST COURSES, BEST LECTURER, BEST PHONES STATRT*********************************************/
-
-    public void updateForAll(String tableName, String updateField, String updateValue, String criteriaField, String criteria){
-        openDatabase();
+    public void saveProfilePics(String regno,byte[] imageData){
         SQLiteDatabase database = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(updateField, updateValue);
-        database.update(tableName, cv, criteriaField + "= ?",
-                new String[]{criteria});
+        cv.put(dbColumnList.userProfilePics.COLUMN_REGNO, regno);
+        cv.put(dbColumnList.userProfilePics.COLUMN_PROFILEPICS, imageData);
+
+        Cursor cursor = verifyImageExist(regno);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.userProfilePics.TABLE_NAME, cv, dbColumnList.userProfilePics.COLUMN_REGNO + " = ?", new String[]{regno});
+        }else{
+            database.insert(dbColumnList.userProfilePics.TABLE_NAME,null,cv);
+        }
+    }
+    public Cursor getAProfilePics(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.userProfilePics.TABLE_NAME,
+                null,
+                dbColumnList.userProfilePics.COLUMN_REGNO + " = ? Limit 1",
+                new String[]{regno},
+                null,
+                null,null);
     }
 
-    /****** INSERT FOR BEST FRIENDS,BEST COURSES, BEST LECTURER, BEST PHONES STATRT*********************************************/
 
-    public void insertForAll(String tableName, String insertField1,String insertField2, String insertValue1,String insertValue2){
-        openDatabase();
+    //    **************************PROFILE PICS********************************
+
+
+    public Cursor verifyApplicationExist(String regno, String companyId){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.applicationList.TABLE_NAME + " WHERE "+dbColumnList.applicationList.COLUMN_REGNO +"= '" + regno +"' AND " +
+                dbColumnList.applicationList.COLUMN_COMPANYID +"= '" + companyId +"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveApplication(String regno,String companyId, String status){
         SQLiteDatabase database = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(insertField1, insertValue1);
-        cv.put(insertField2, insertValue2);
-        database.insert(tableName,null,cv);
+        cv.put(dbColumnList.applicationList.COLUMN_REGNO, regno);
+        cv.put(dbColumnList.applicationList.COLUMN_COMPANYID, companyId);
+        cv.put(dbColumnList.applicationList.COLUMN_ACCEPTSTATUS, status);
+
+        Cursor cursor = verifyApplicationExist(regno,companyId);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.applicationList.TABLE_NAME, cv, dbColumnList.applicationList.COLUMN_REGNO + " = ? AND "
+                    + dbColumnList.applicationList.COLUMN_COMPANYID + " = ?" , new String[]{regno,companyId});
+        }else{
+            database.insert(dbColumnList.applicationList.TABLE_NAME,null,cv);
+        }
+    }
+    public Cursor getAllStudentApplication(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.applicationList.TABLE_NAME,
+                null,
+                dbColumnList.applicationList.COLUMN_REGNO + " = ?",
+                new String[]{regno},
+                null,
+                null,dbColumnList.applicationList.COLUMN_ACCEPTSTATUS + " desc");
+    }
+    public Cursor getAllCompanyApplication(String companyId){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.applicationList.TABLE_NAME,
+                null,
+                dbColumnList.applicationList.COLUMN_COMPANYID + " = ?",
+                new String[]{companyId},
+                null,
+                null,null);
     }
 }

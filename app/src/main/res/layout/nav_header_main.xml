@@ -35,17 +35,17 @@
         android:layout_gravity="center"
         android:text="@string/nav_header_title"
         android:textStyle="bold|italic"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textColor="@color/colorWhite"
         />
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/nav_header_subtitle"
         android:textStyle="bold|italic"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="@color/colorWhite"
         />
 

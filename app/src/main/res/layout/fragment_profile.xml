@@ -57,7 +57,7 @@
                             android:id="@+id/pname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Abdulraheem Sherif Adavuruku."
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -66,7 +66,7 @@
                             android:id="@+id/pregno"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="14/37139D/1. - 200 Level."
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -75,7 +75,16 @@
                             android:id="@+id/pfaculty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Faculty Of Science. / Computer Science."
+                            android:text="@string/load"
+                            android:textColor="@color/colorBlack"
+                            android:lineSpacingExtra="6dp"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="sans-serif-medium"/>
+                        <TextView
+                            android:id="@+id/pmodetype"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -85,7 +94,7 @@
                             android:id="@+id/pemailphone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="aabdulraheemsherif@gmail.com / 08164377187"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -94,7 +103,7 @@
                             android:id="@+id/pcontact"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Flat D41 Gadua Estate, Garki FCT-Abuja."
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -136,7 +145,7 @@
                         <TextView android:id="@+id/sname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mr. John Pawayok L."
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -146,7 +155,7 @@
                             android:id="@+id/sfaculty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Faculty Of Science. / Computer Science."
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
@@ -156,7 +165,7 @@
                             android:id="@+id/semailphone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="aabdulraheemsherif@gmail.com / 08164377187"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:layout_marginBottom="5dp"
                             android:lineSpacingExtra="6dp"
@@ -198,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="OutSource Global Technology Nig. Ltd"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:fontFamily="sans-serif-medium"/>
@@ -206,18 +215,26 @@
                             android:id="@+id/cemailphone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="aabdulraheemsherif@gmail.com / 08164377187"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="sans-serif-medium"/>
-
+                        <TextView
+                            android:id="@+id/cstatelgov"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/load"
+                            android:textColor="@color/colorBlack"
+                            android:lineSpacingExtra="6dp"
+                            android:fontFamily="sans-serif-medium"/>
                         <TextView
                             android:id="@+id/ccontact"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="5 Remi Olowude way, 2nd roundabout, Marwa Bus-stop, Lekki Phase 1"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:fontFamily="sans-serif-medium"/>
@@ -258,7 +275,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="Start Date : Wednesday 24, January 2019"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:fontFamily="sans-serif-medium"/>
@@ -266,29 +283,22 @@
                             android:id="@+id/iend"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="End Date :  Wednesday 24, January 2020"
+                            android:text="@string/load"
                             android:textColor="@color/colorBlack"
                             android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="sans-serif-medium"/>
-                        <TextView
-                            android:id="@+id/iattend"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text=" Last Att : Tuesday 01,February 2019"
-                            android:textColor="@color/colorAccent"
-                            android:lineSpacingExtra="6dp"
-                            android:fontFamily="sans-serif-medium"/>
+
                         <TextView
                             android:id="@+id/ileft"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text=" Days Left : 4 Months , 3 Weeks , 31 Days"
-                            android:textColor="@color/colorAbuad"
+                            android:text="@string/load"
+                            android:textColor="@color/colorAccent"
                             android:lineSpacingExtra="6dp"
                             android:fontFamily="sans-serif-medium"/>
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>

@@ -19,9 +19,9 @@ public class about extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
     }
 }

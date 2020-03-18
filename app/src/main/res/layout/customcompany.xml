@@ -80,7 +80,7 @@
                 android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/Email"
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -89,6 +89,28 @@
                 android:text="Loading..."
                 android:textColor="@color/colorBlack"
                 android:textStyle="italic" />
+            <TextView
+                android:id="@+id/appstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:lineSpacingExtra="6dp"
+                android:textStyle="bold"
+                android:text="Loading..."
+                android:textColor="@color/colorAccent" />
+            <Button
+                android:id="@+id/btnApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/colorAbuad"
+
+                android:padding="10dp"
+                android:text="APPLY FOR IT PLACEMENT  "
+                android:textColor="@color/fairwhite"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

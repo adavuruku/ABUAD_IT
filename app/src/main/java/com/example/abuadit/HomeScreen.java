@@ -1,37 +1,40 @@
 package com.example.abuadit;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeScreen extends AppCompatActivity implements itoffice.OnFragmentInteractionListener,
-        companies.OnFragmentInteractionListener, profile.OnFragmentInteractionListener{
+        notice.OnFragmentInteractionListener, profile.OnFragmentInteractionListener{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private SharedPreferences MyId;
+    String userID,DrawerFullname,DrawerEmail;
     Toolbar toolbar;
+    dbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,10 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
+        MyId = this.getSharedPreferences("MyId", this.MODE_PRIVATE);
+        userID = MyId.getString("MyId", "");
+        //retrieve student information
+        dbHelper = new dbHelper(getApplicationContext());
 
         initNavigationDrawer();
     }
@@ -65,19 +72,49 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                 Intent intent;
                 int id = menuItem.getItemId();
                 drawerLayout.closeDrawers();
-                switch (id){
+                switch (id) {
                     case R.id.about:
                         intent = new Intent(getApplicationContext(), about.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         finish();
                         break;
+                    case R.id.appstatus:
+                        intent = new Intent(getApplicationContext(), StudentCompany.class);
+                        intent.putExtra("USERID",userID);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
                 }
-                drawerLayout.closeDrawers();
-                Toast.makeText(getApplicationContext(),"Copied", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
+
+        byte[] image_data=null;
+        Cursor profpics = dbHelper.getAProfilePics(userID);
+        if (profpics.getCount() >= 1) {
+            profpics.moveToFirst();
+            image_data = profpics.getBlob(profpics.getColumnIndex(dbColumnList.userProfilePics.COLUMN_PROFILEPICS));
+        }
+        profpics.close();
+
+        profpics = dbHelper.getAStudent(userID);
+        if (profpics.getCount() >= 1) {
+            profpics.moveToFirst();
+            DrawerEmail = profpics.getString(profpics.getColumnIndex(dbColumnList.abuadstudent.COLUMN_EMAIL));
+            DrawerFullname = profpics.getString(profpics.getColumnIndex(dbColumnList.abuadstudent.COLUMN_FULLNAME));
+        }
+        profpics.close();
+
+        View header = navigationView.getHeaderView(0);
+        TextView tv_email =  header.findViewById(R.id.email);
+        TextView tv_fullname =  header.findViewById(R.id.uname);
+        tv_email.setText(DrawerEmail);
+        tv_fullname.setText(DrawerFullname);
+        ImageView imageV = header.findViewById(R.id.profile_image);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image_data, 0, image_data.length);
+        imageV.setImageBitmap(bitmap);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
@@ -112,11 +149,13 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                 Intent intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                finish();
                 break;
-//            case R.id.uploadm:
-//                displaySaveMsg();
-//                break;
+            case R.id.appstatus:
+                intent = new Intent(getApplicationContext(), StudentCompany.class);
+                intent.putExtra("USERID",userID);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
 //            case R.id.close:
 //                verify_close();
 //                break;
@@ -144,13 +183,13 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                     profile.setRetainInstance(true);
                     return profile;
                 case 1:
+                    notice notice = new notice();
+                    notice.setRetainInstance(true);
+                    return notice;
+                case 2:
                     itoffice itoffice = new itoffice();
                     itoffice.setRetainInstance(true);
                     return itoffice;
-                case 2:
-                    companies companies = new companies();
-                    companies.setRetainInstance(true);
-                    return companies;
                 default:
                     return null;
             }
@@ -169,9 +208,9 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                 case 0:
                     return "PROFILE";
                 case 1:
-                    return "IT OFFICES";
+                    return "NOTICE";
                 case 2:
-                    return "COMPANIES";
+                    return "IT OFFICES";
 
             }
             return null;

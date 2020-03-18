@@ -8,15 +8,35 @@
         android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView"/>
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_home"
+        app:showAsAction="never"
+        android:orderInCategory="20"/>
+    <item
+        android:id="@+id/appstatus"
+        android:icon="@drawable/ic_update"
+        android:title="@string/menu_appstatus"
+        app:showAsAction="never"
+        android:orderInCategory="30"/>
+    <item
+        android:id="@+id/register"
+        android:icon="@drawable/ic_list"
+        android:title="@string/menu_register"
+        app:showAsAction="never"
+        android:orderInCategory="40"/>
     <item
         android:id="@+id/about"
-        android:orderInCategory="100"
+        android:orderInCategory="50"
         android:title="About"
+        android:icon="@drawable/ic_edit"
         app:showAsAction="never" />
     <item
         android:id="@+id/close"
         android:title="Sign Out"
-        android:orderInCategory="300"
+        android:orderInCategory="60"
         app:showAsAction="never"
         android:icon="@drawable/ic_logout"/>
 </menu>

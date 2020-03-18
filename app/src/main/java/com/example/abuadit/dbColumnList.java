@@ -7,59 +7,83 @@ import android.provider.BaseColumns;
  */
 
 public class dbColumnList {
-    public static class userDetails implements BaseColumns{
-        //we dont need to create a column for the id because the BaseColumns
-        //interface already automatically add _ID Column to the table
-        public static final String TABLE_NAME = "userDetails";
-       public static final String COLUMN_PASSWORD = "password";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_QOUTE = "userQoute";
-        public static final String COLUMN_NAME = "fullName";
-        public static final String COLUMN_DEPT = "userDept";
-        public static final String COLUMN_LEVEL = "userLevel";
-        public static final String COLUMN_GENDER = "userGender";
-        public static final String COLUMN_RELIGION = "userReligion";
-        public static final String COLUMN_STATE = "userState";
-        public static final String COLUMN_LGOV = "userLgov";
-        public static final String COLUMN_PERMADD = "userPermAdd";
-        public static final String COLUMN_CSTATE = "userCState";
-        public static final String COLUMN_CLGOV = "userCLgov";
-        public static final String COLUMN_CPERMADD = "userCPermAdd";
-        public static final String COLUMN_BESTMOMENT = "userBestMoment";
-        public static final String COLUMN_REGNO = "userRegNo";
-        public static final String COLUMN_EMAIL = "userEmail";
-        //public static final String COLUMN_PICS = "userPics";
-        public static final String COLUMN_LASTLOGIN = "lastLogin";
+
+    public static class abuadItInformation implements BaseColumns{
+        public static final String TABLE_NAME = "abuadItInformation";
+        public static final String COLUMN_REGNO= "regno";
+        public static final String COLUMN_STAFFID = "staffid";
+        public static final String COLUMN_COMPANYID = "comppanyid";
+        public static final String COLUMN_DATESTART = "dateStart";
+        public static final String COLUMN_DATEEND = "dateEnd";
+        public static final String COLUMN_DURATION = "duration";
     }
-    public static class myAccount implements BaseColumns{
-        public static final String TABLE_NAME = "myAccount";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_LASTLOGIN = "lastLogin";
+    public static class abuadCompany implements BaseColumns{
+        public static final String TABLE_NAME = "abuadCompany";
+        public static final String COLUMN_COMPANYNAME= "companyname";
+        public static final String COLUMN_COMPANYPHONE = "companyphone";
+        public static final String COLUMN_COMPANYEMAIL= "companyemail";
+        public static final String COLUMN_COMPANYADDRESS= "companyaddress";
+        public static final String COLUMN_COMPANYID = "companyid";
+        public static final String COLUMN_COMPANYDESCRIPTION= "companydescription";
+        public static final String COLUMN_COMPANYSTATE= "companystate";
+        public static final String COLUMN_COMPANYLGOV= "companylgov";
     }
-    public static class userPics implements BaseColumns{
-        public static final String TABLE_NAME = "userPics";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_PICS = "userPics";
-    }
-    public static class userBest implements BaseColumns{
-        public static final String TABLE_NAME = "userBest";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_BESTFRIEND = "bestFriend";
+    public static class abuadNotice implements BaseColumns{
+        public static final String TABLE_NAME = "abuadnotice";
+        public static final String COLUMN_ID = "noticeid";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_AUTHOR = "author";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_NOTICEDATE = "noticedate";
+        public static final String COLUMN_STATUS = "delStatus";
     }
 
-    public static class userCourse implements BaseColumns{
-        public static final String TABLE_NAME = "userCourse";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_BESTCOURSE = "bestCourses";
+    public static class abuadLecturer implements BaseColumns{
+        public static final String TABLE_NAME = "abuadLecturer";
+        public static final String COLUMN_STAFFID = "staffid";
+        public static final String COLUMN_FULLNAME= "fullname";
+        public static final String COLUMN_FACULTY= "faculty";
+        public static final String COLUMN_DEPARTMENT= "department";
+        public static final String COLUMN_EMAIL = "email";
+        public static final String COLUMN_PHONE= "phone";
+        public static final String COLUMN_STAFFADDRESS = "staffaddress";
     }
-    public static class userLecturer implements BaseColumns{
-        public static final String TABLE_NAME = "userLecturer";
-        public static final String COLUMN_USERID = "userID";
-        public static final String COLUMN_BESTLECTURER = "bestLecturer";
-    }
-    public static class userPhone implements BaseColumns{
-        public static final String TABLE_NAME = "userPhone";
-        public static final String COLUMN_USERID = "userID";
+    public static class abuadstudent implements BaseColumns{
+        public static final String TABLE_NAME = "abuadstudent";
+        public static final String COLUMN_REGNO = "regno";
+        public static final String COLUMN_FULLNAME = "fullname";
+        public static final String COLUMN_DEPARTMENT = "department";
+        public static final String COLUMN_FACULTY = "faculty";
+        public static final String COLUMN_GENDER = "gender";
         public static final String COLUMN_PHONE = "phone";
+        public static final String COLUMN_EMAIL = "email";
+        public static final String COLUMN_DEGREE= "degree";
+        public static final String COLUMN_MODE = "mode";
+        public static final String COLUMN_STATE = "itstate";
+        public static final String COLUMN_LGOV= "itlgov";
+        public static final String COLUMN_LEVEL = "itlevel";
+        public static final String COLUMN_CONTACTADD = "contactAddress";
+    }
+
+    public static class applicationList implements BaseColumns{
+        public static final String TABLE_NAME = "applicationList";
+        public static final String COLUMN_REGNO = "regno";
+        public static final String COLUMN_COMPANYID= "companyid";
+        public static final String COLUMN_ACCEPTSTATUS = "acceptStatus"; //student - 0 / 1 company - 2
+    }
+
+    public static class registerList implements BaseColumns{
+        public static final String TABLE_NAME = "registerList";
+        public static final String COLUMN_REGNO = "regNo";
+        public static final String COLUMN_COMPANYID = "companyid";
+        public static final String COLUMN_RECORDID = "recordid";
+        public static final String COLUMN_RECORDTYPE = "recordtype";
+        public static final String COLUMN_DATE = "recordDate";
+    }
+
+    public static class userProfilePics implements BaseColumns{
+        public static final String TABLE_NAME = "userProfilePics";
+        public static final String COLUMN_REGNO = "regNo";
+        public static final String COLUMN_PROFILEPICS = "profilepics";
     }
 }

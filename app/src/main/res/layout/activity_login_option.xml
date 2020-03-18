@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/loginColor"
+    tools:context=".LoginOption">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:paddingVertical="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/State"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="6dp"
+            android:textSize="30dp"
+            android:text="Getting Started..."
+            android:textColor="@color/titleColor"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/buttonshape"
+            android:padding="15sp"
+            android:layout_marginTop="20dp"
+            android:text="ABUAD IT STUDENT"
+            android:textColor="@color/fairwhite"
+            android:textSize="25sp" />
+        <Button
+            android:id="@+id/btnStaff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/buttonblue"
+            android:padding="15sp"
+            android:layout_marginTop="20dp"
+            android:text="ABUAD STAFF"
+            android:textColor="@color/fairwhite"
+            android:textSize="25sp" />
+        <Button
+            android:id="@+id/btnCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/buttonshapered"
+            android:fontFamily="@"
+            android:padding="15sp"
+            android:layout_marginTop="20dp"
+            android:text="ORGANIZATION"
+            android:textColor="@color/fairwhite"
+            android:textSize="25sp"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
