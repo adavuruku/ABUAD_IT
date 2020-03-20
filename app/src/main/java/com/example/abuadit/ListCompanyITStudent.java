@@ -1,9 +1,12 @@
 package com.example.abuadit;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +21,10 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,7 +45,7 @@ import java.util.Map;
 
 
 public class ListCompanyITStudent extends Fragment {
-    private List<myModels.companyModel> allNoticeList;
+    private List<myModels.studentModel> allNoticeList;
     private static int SPLASH_TIME_OUT = 500;//0.5seconds
     SwipeRefreshLayout mSwipeRefreshLayout;
     ProgressDialog pd;
@@ -47,12 +53,12 @@ public class ListCompanyITStudent extends Fragment {
     String fullname, email,comingNews;
     private boolean isConnected = false;
     RecyclerView recyclerView;
-    private companyAdapter recyclerAdapter;
+    private studentAdapter recyclerAdapter;
     String search, allResult,userID,companyID;
     ProgressBar progressBar;
     dbHelper dbHelper;
     byte[] byteArray;
-    private SharedPreferences MyId;
+    private SharedPreferences MyCompanyId;
     ArrayList<myModels.companyModel> noticeList;
     String address = "http://192.168.1.64/abuadit/abuadrest.php";
     private OnFragmentInteractionListener mListener;
@@ -90,9 +96,8 @@ public class ListCompanyITStudent extends Fragment {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-
-        MyId = getActivity().getSharedPreferences("MyId", getActivity().MODE_PRIVATE);
-        userID = MyId.getString("MyId", "");
+        MyCompanyId = getActivity().getSharedPreferences("MyCompanyId", getActivity().MODE_PRIVATE);
+        userID = MyCompanyId.getString("MyCompanyId", "");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -159,15 +164,6 @@ public class ListCompanyITStudent extends Fragment {
                 JSONArray jsonarray = new JSONArray(allResult);
                 for (int i = 0; i < jsonarray.length(); i++) {
                     JSONObject jsonobject = jsonarray.getJSONObject(i);
-
-                    /**
-                    * Save to abuadApplication
-                     * Save to abuadStudents
-                     * so any time you pic from abuadApplication  u can as well pick from
-                     * abuadStudents
-                     *
-                    * */
-
                     dbHelper.saveApplication(
                             jsonobject.getString("regno"),
                             jsonobject.getString("companyId"),
@@ -194,19 +190,30 @@ public class ListCompanyITStudent extends Fragment {
                     dbHelper.saveProfilePics(jsonobject.getString("regno"),
                             byteArray );
 
-                    myModels.companyModel companyList = new myModels().new companyModel(
-                            jsonobject.getString("companyDescription"),
-                            jsonobject.getString("companyAddress"),
-                            jsonobject.getString("companyState"),
-                            jsonobject.getString("companyLocalGov"),
-                            jsonobject.getString("companyPhone"),
-                            jsonobject.getString("companyEmail"),
-                            jsonobject.getString("companyName"),
-                            jsonobject.getString("companyId"),
-                            jsonobject.getString("appStatus")
-                    );
+                    if (jsonobject.getString("appStatus").equals("2")){
+                        myModels.studentModel studentModel = new myModels().new studentModel(
+                                jsonobject.getString("studName"),
+                                jsonobject.getString("studFaculty"),
+                                jsonobject.getString("studDept"),
+                                jsonobject.getString("itLevel"),
+                                jsonobject.getString("itState"),
+                                jsonobject.getString("itLgov"),
+                                jsonobject.getString("gender"),
+                                jsonobject.getString("studEmail"),
+                                jsonobject.getString("studPhone"),
+                                jsonobject.getString("regno"),
+                                byteArray,
+                                jsonobject.getString("mode"),
+                                jsonobject.getString("degree"),
+                                jsonobject.getString("contactAddress"),"",
+                                ""
 
-                    allNoticeList.add(companyList);
+                        );
+
+                        allNoticeList.add(studentModel);
+                    }
+
+
                 }
 
             } catch (JSONException | IOException e) {
@@ -219,6 +226,137 @@ public class ListCompanyITStudent extends Fragment {
             loadData();
             super.onPostExecute(s);
         }
+    }
+
+    //load local no internet connection
+    class LoadLocalData extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                dbHelper = new dbHelper(getContext());
+                allNoticeList.clear();
+                Cursor allCompany = dbHelper.getAllCompanyApplication(userID, "2");
+                if (allCompany.getCount() > 0) {
+                    while (allCompany.moveToNext()) {
+
+                        Cursor aStudent = dbHelper.getAStudent(
+                                allCompany.getString(allCompany.getColumnIndex(dbColumnList.applicationList.COLUMN_REGNO))
+                        );
+                        if (aStudent.getCount() > 0) {
+                            aStudent.moveToFirst();
+
+                            //get student picture
+                            Cursor studPics = dbHelper.getAProfilePics(allCompany.getString(allCompany.getColumnIndex(dbColumnList.applicationList.COLUMN_REGNO)));
+                            if (studPics.getCount() > 0) {
+                                studPics.moveToFirst();
+                                byteArray = studPics.getBlob(studPics.getColumnIndex(dbColumnList.userProfilePics.COLUMN_PROFILEPICS));
+                            }
+                            studPics.close();
+
+                            myModels.studentModel studentModel = new myModels().new studentModel(
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_FULLNAME)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_FACULTY)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_DEPARTMENT)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_LEVEL)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_STATE)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_LGOV)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_GENDER)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_EMAIL)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_PHONE)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_REGNO)),
+                                    byteArray,
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_MODE)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_DEGREE)),
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_CONTACTADD)),"",
+                                    allCompany.getString(allCompany.getColumnIndex(dbColumnList.applicationList.COLUMN_ACCEPTSTATUS))
+                            );
+                            allNoticeList.add(studentModel);
+                        }
+                    }
+                }
+            } finally { }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            loadData();
+            super.onPostExecute(s);
+        }
+    }
+
+
+    public void loadData(){
+        recyclerAdapter = new studentAdapter( allNoticeList, getContext(), new studentAdapter.OnItemClickListener() {
+            @Override
+            public void onNameClick(View v, int position) {
+
+            }
+
+            @Override
+            public void onMarkClick(View v, int position) {
+
+            }
+
+            @Override
+            public void onImageClick(View v, int position) {
+                View snackView = getLayoutInflater().inflate(R.layout.dialogview, null);
+
+                ImageView imv = snackView.findViewById(R.id.profile_pic);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(allNoticeList.get(position).getProfilePic(), 0,allNoticeList.get(position).getProfilePic().length);
+                imv.setImageBitmap(bitmap);
+
+                TextView myvi = snackView.findViewById(R.id.txtUser);
+                TextView pname = snackView.findViewById(R.id.pname);
+
+                myvi.setText(allNoticeList.get(position).getStudName());
+                pname.setText(allNoticeList.get(position).getStudName());
+
+                TextView pfaculty = snackView.findViewById(R.id.pfaculty);
+                pfaculty.setText(
+                        "Faculty Of "+allNoticeList.get(position).getStudFaculty() + " / "+ allNoticeList.get(position).getStudDept()
+                );
+
+                TextView pregno = snackView.findViewById(R.id.pregno);
+                pregno.setText(
+                        allNoticeList.get(position).getRegno() + " / "+ allNoticeList.get(position).getStudLevel() + " Level"
+                );
+
+                TextView pemailphone = snackView.findViewById(R.id.pemailphone);
+                pemailphone.setText(
+                        allNoticeList.get(position).getStudEmail() + " / "+ allNoticeList.get(position).getStudPhone()
+                );
+
+                TextView pmodetype = snackView.findViewById(R.id.pemailphone);
+                pmodetype.setText(
+                        allNoticeList.get(position).getMode() + " / "+ allNoticeList.get(position).getDegree()
+                );
+
+                TextView pstate = snackView.findViewById(R.id.pstate);
+                pstate.setText(
+                        allNoticeList.get(position).getItState() + " State / "+ allNoticeList.get(position).getItLgov()
+                );
+
+                TextView pcontact = snackView.findViewById(R.id.pcontact);
+                pcontact.setText(
+                        allNoticeList.get(position).getContactAddress()
+                );
+
+                final Dialog d = new Dialog(getActivity());
+                d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                d.setCanceledOnTouchOutside(true);
+                d.setContentView(snackView);
+                d.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
+                d.show();
+
+            }
+
+        });
+        recyclerAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(recyclerAdapter);
+        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

@@ -46,7 +46,7 @@
                 android:lineSpacingExtra="6dp"
                 android:text="Loading..."
                 android:textAllCaps="true"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorBlack"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorText"
                 android:lineSpacingExtra="6dp"
                 android:text="Loading..."/>
 
@@ -66,7 +66,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-medium"
                 android:lineSpacingExtra="6dp"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorText"
                 android:text="Loading..." />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:lineSpacingExtra="6dp"
                 android:text="Loading..."
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorText" />
 
             <TextView
                 android:id="@+id/description"
@@ -87,8 +87,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:lineSpacingExtra="6dp"
                 android:text="Loading..."
-                android:textColor="@color/colorBlack"
-                android:textStyle="italic" />
+                android:textColor="@color/colorText" />
             <TextView
                 android:id="@+id/appstatus"
                 android:layout_width="wrap_content"
@@ -98,19 +97,17 @@
                 android:lineSpacingExtra="6dp"
                 android:textStyle="bold"
                 android:text="Loading..."
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/colorText" />
             <Button
                 android:id="@+id/btnApply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:background="@color/colorAbuad"
-
+                android:background="@drawable/buttonshape"
                 android:padding="10dp"
                 android:text="APPLY FOR IT PLACEMENT  "
-                android:textColor="@color/fairwhite"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

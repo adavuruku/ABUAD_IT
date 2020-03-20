@@ -3,6 +3,7 @@ package com.example.abuadit;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -69,6 +71,18 @@ public class readNotice extends AppCompatActivity {
         initNavigationDrawer();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        finish();
+    }
     public void initNavigationDrawer() {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -84,6 +98,28 @@ public class readNotice extends AppCompatActivity {
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         finish();
                         break;
+                    case R.id.home:
+                        intent = new Intent(getApplicationContext(), HomeScreen.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
+                    case R.id.register:
+                        intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
+                    case R.id.close:
+                        SharedPreferences.Editor editor;
+                        editor = MyId.edit();
+                        editor.putString("MyId", "");
+                        editor.apply();
+
+                        intent = new Intent(getApplicationContext(), LoginOption.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
                 }
 
 
@@ -132,5 +168,50 @@ public class readNotice extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+    }
+
+    //menu settings
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home_screen, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+        switch (id){
+            case R.id.about:
+                intent = new Intent(getApplicationContext(), about.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.home:
+                intent = new Intent(getApplicationContext(), HomeScreen.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.register:
+                intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.close:
+                SharedPreferences.Editor editor;
+                editor = MyId.edit();
+                editor.putString("MyId", "");
+                editor.apply();
+
+                intent = new Intent(getApplicationContext(), LoginOption.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

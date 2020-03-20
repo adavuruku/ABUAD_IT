@@ -2,13 +2,16 @@
 <resources>
     <color name="colorPrimary">#2d548d</color>
     <color name="colorPrimaryDark">#E70554</color>
-    <color name="colorWhite">#FAF8F9</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorAbuad">#2d548d</color>
     <color name="colorBlack">#070707</color>
     <color name="fairwhite">#F0F0F0 </color>
-    <color name="colorGreen">#037427</color>
+    <color name="colorGreen">#273c75</color>
     <color name="colorblue">#7ed6df</color>
     <color name="loginColor">#dff9fb</color>
     <color name="titleColor">#95afc0</color>
+    <color name="titleBlueDark">#22a6b3</color>
+    <color name="colorText">#909699</color>
+    <color name="setBackGround">#DDE3E6</color>
 </resources>

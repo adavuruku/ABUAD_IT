@@ -15,7 +15,7 @@ public class dbHelper extends SQLiteOpenHelper {
     // Database Info
     public static final String DATABASE_NAME = "ABUADOOO.db";
     public static final String DBLOCATION = "/data/data/com.example.abuadit/databases/";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     private Context mcontext;
     private SQLiteDatabase mdatabase;
 
@@ -98,11 +98,10 @@ public class dbHelper extends SQLiteOpenHelper {
                 ")";
         String CREATE_TABLE_REGISTERLIST= "CREATE TABLE IF NOT EXISTS " + dbColumnList.registerList.TABLE_NAME +
                 "(" +
-                dbColumnList.registerList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
-                dbColumnList.registerList.COLUMN_RECORDID + " VARCHAR, " +
-                dbColumnList.registerList.COLUMN_RECORDTYPE + " VARCHAR, " +
+                dbColumnList.registerList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                dbColumnList.registerList.COLUMN_RECORSTATUS + " VARCHAR, " +
                 dbColumnList.registerList.COLUMN_REGNO + " VARCHAR, " +
-                dbColumnList.registerList.COLUMN_DATE + " TEXT, " +
+                dbColumnList.registerList.COLUMN_DATE + " VARCHAR, " +
                 dbColumnList.registerList.COLUMN_COMPANYID+ " VARCHAR " +
                 ")";
 
@@ -425,13 +424,76 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,
                 null,dbColumnList.applicationList.COLUMN_ACCEPTSTATUS + " desc");
     }
-    public Cursor getAllCompanyApplication(String companyId){
+    public Cursor getAllCompanyApplication(String companyId, String status){
         SQLiteDatabase database = getReadableDatabase();
         return database.query(dbColumnList.applicationList.TABLE_NAME,
                 null,
-                dbColumnList.applicationList.COLUMN_COMPANYID + " = ?",
+                dbColumnList.applicationList.COLUMN_COMPANYID + " = ? AND " +dbColumnList.applicationList.COLUMN_ACCEPTSTATUS + "= ?",
+                new String[]{companyId, status},
+                null,
+                null,null);
+    }
+
+
+
+
+
+
+    public Cursor verifyRegisterExist(String regno, String companyId,String dateAttendance){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT * FROM "+dbColumnList.registerList.TABLE_NAME + " WHERE "+dbColumnList.registerList.COLUMN_REGNO +"= '" + regno +"' AND " +
+                dbColumnList.registerList.COLUMN_COMPANYID +"= '" + companyId +"' AND "+dbColumnList.registerList.COLUMN_DATE+" = '"+dateAttendance+"' Limit 1";
+        return database.rawQuery(sql, null);
+    }
+    public void saveRegister(String regno, String companyId, String status, String dateAttendance){
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.registerList.COLUMN_REGNO, regno);
+        cv.put(dbColumnList.registerList.COLUMN_COMPANYID, companyId);
+        cv.put(dbColumnList.registerList.COLUMN_DATE, dateAttendance);
+        cv.put(dbColumnList.registerList.COLUMN_RECORSTATUS, status);
+
+        Cursor cursor = verifyRegisterExist(regno, companyId, dateAttendance);
+        if(cursor.getCount() >= 1) {
+            database.update(dbColumnList.registerList.TABLE_NAME, cv, dbColumnList.registerList.COLUMN_REGNO + " = ? AND "
+                    + dbColumnList.registerList.COLUMN_COMPANYID + " = ? AND " + dbColumnList.registerList.COLUMN_DATE + " = ?", new String[]{regno,companyId,dateAttendance});
+        }else{
+            database.insert(dbColumnList.registerList.TABLE_NAME,null,cv);
+        }
+    }
+    public Cursor getAllStudentAttendance(String regno){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.registerList.TABLE_NAME,
+                null,
+                dbColumnList.registerList.COLUMN_REGNO + " = ?",
+                new String[]{regno},
+                null,
+                null,dbColumnList.registerList.COLUMN_DATE + " desc");
+    }
+    public Cursor getAllStudentAttendanceByDate(String dateAttend){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.registerList.TABLE_NAME,
+                null,
+                dbColumnList.registerList.COLUMN_DATE + " = ?",
+                new String[]{dateAttend},
+                null,
+                null,dbColumnList.registerList.COLUMN_DATE + " desc");
+    }
+    public Cursor getAllCompanyAttendance(String companyId){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.registerList.TABLE_NAME,
+                null,
+                dbColumnList.registerList.COLUMN_COMPANYID + " = ?",
                 new String[]{companyId},
                 null,
                 null,null);
     }
+
+    //delete all attendance
+    public void deleteAttendace(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.registerList.TABLE_NAME,
+                null,null);
+    }
+
 }

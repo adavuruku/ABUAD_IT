@@ -6,12 +6,12 @@
     <stroke
         android:color="@color/colorAbuad"
         android:width="2dp"
-        />
+    />
     <solid
-        android:color="@color/loginColor"
+        android:color="@color/fairwhite"
         />
     <size
-        android:width="270dp"
-        android:height="60dp"
+        android:width="100dp"
+        android:height="50dp"
         />
 </shape>

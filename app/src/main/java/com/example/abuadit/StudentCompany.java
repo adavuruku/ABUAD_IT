@@ -82,6 +82,28 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         finish();
                         break;
+                    case R.id.home:
+                        intent = new Intent(getApplicationContext(), HomeScreen.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
+                    case R.id.register:
+                        intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
+                    case R.id.close:
+                        SharedPreferences.Editor editor;
+                        editor = MyId.edit();
+                        editor.putString("MyId", "");
+                        editor.apply();
+
+                        intent = new Intent(getApplicationContext(), LoginOption.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
 
                 }
                 return true;
@@ -140,20 +162,37 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();;
+        int id = item.getItemId();
+        Intent intent;
         switch (id){
             case R.id.about:
-                Intent intent = new Intent(getApplicationContext(), about.class);
+                intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
                 break;
-//            case R.id.uploadm:
-//                displaySaveMsg();
-//                break;
-//            case R.id.close:
-//                verify_close();
-//                break;
+            case R.id.home:
+                intent = new Intent(getApplicationContext(), HomeScreen.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.register:
+                intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.close:
+                SharedPreferences.Editor editor;
+                editor = MyId.edit();
+                editor.putString("MyId", "");
+                editor.apply();
+
+                intent = new Intent(getApplicationContext(), LoginOption.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -213,6 +252,9 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
         }else{
             super.onBackPressed();
         }
-
+        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        finish();
     }
 }

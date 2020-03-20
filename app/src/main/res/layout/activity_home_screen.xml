@@ -60,7 +60,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAbuad" />
+                android:background="@color/colorGreen" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorGreen </item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -18,5 +18,9 @@
     <style name="DialogTheme">
         <item name="android:windowEnterAnimation">@anim/left_in</item>
         <item name="android:windowExitAnimation">@anim/right_out</item>
+    </style>
+    <style name="DialogAnimation_2">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom</item>
     </style>
 </resources>

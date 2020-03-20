@@ -9,13 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAbuad">
+        android:background="@color/fairwhite">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/colorWhite"
+            android:background="@color/fairwhite"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <ProgressBar

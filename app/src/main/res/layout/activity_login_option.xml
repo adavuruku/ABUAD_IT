@@ -45,34 +45,36 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:background="@drawable/buttonshape"
-            android:padding="15sp"
+            android:padding="10sp"
             android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
             android:text="ABUAD IT STUDENT"
-            android:textColor="@color/fairwhite"
-            android:textSize="25sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/btnStaff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="@drawable/buttonblue"
-            android:padding="15sp"
+            android:background="@drawable/buttonshapered"
+            android:padding="10sp"
             android:layout_marginTop="20dp"
             android:text="ABUAD STAFF"
-            android:textColor="@color/fairwhite"
-            android:textSize="25sp" />
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/btnCompany"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:background="@drawable/buttonshapered"
-            android:fontFamily="@"
-            android:padding="15sp"
+            android:fontFamily="sans-serif-light"
+            android:padding="10sp"
             android:layout_marginTop="20dp"
             android:text="ORGANIZATION"
-            android:textColor="@color/fairwhite"
-            android:textSize="25sp"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
     </LinearLayout>
 
 

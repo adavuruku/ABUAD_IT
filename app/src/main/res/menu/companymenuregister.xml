@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/save"
+        android:title="SAVE"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_save"
+        android:iconTint="@color/colorAccent"
+        android:orderInCategory="40"/>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_home"
+        app:showAsAction="never"
+        android:orderInCategory="43"/>
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="50"
+        android:title="About"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/close"
+        android:title="Sign Out"
+        android:orderInCategory="60"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_logout"/>
+</menu>

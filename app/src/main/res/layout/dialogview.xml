@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/fairwhite"
+    android:id="@+id/lay">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fairwhite">
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:contentDescription="Profile Pics"
+            android:scaleType="fitXY"
+            android:src="@drawable/pasport" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:typeface="sans"
+            android:id="@+id/txtUser"
+            android:textSize="15sp"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:background="#59696969"
+            android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp"
+            />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="2dp"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/pname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pregno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pfaculty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pmodetype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/pemailphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pcontact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

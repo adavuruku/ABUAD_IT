@@ -11,8 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class LoginOption extends AppCompatActivity {
-    private SharedPreferences MyId;
-
+    private SharedPreferences MyId,MyCompanyId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +46,21 @@ public class LoginOption extends AppCompatActivity {
             }
         });
 
+        MyCompanyId = this.getSharedPreferences("MyCompanyId", this.MODE_PRIVATE);
+        final String MyCompany= MyCompanyId.getString("MyCompanyId", "");
         companyLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CompanyLogin.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                if (MyCompany.equals("")){
+                    Intent intent = new Intent(getApplicationContext(), CompanyLogin.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), companyHome.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+
             }
         });
     }

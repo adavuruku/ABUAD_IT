@@ -185,7 +185,7 @@ public class CompanyLogin extends AppCompatActivity {
                     pd.hide();
                 }
                 Toast.makeText(getApplicationContext(),"Welcome "+ studentName + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplication(), HomeScreen.class);
+                Intent intent = new Intent(getApplication(), companyHome.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
@@ -209,13 +209,21 @@ public class CompanyLogin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        Intent intent;
         switch (id) {
             case R.id.about:
-                Intent intent = new Intent(getApplicationContext(), about.class);
+                intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
             case R.id.close:
+                SharedPreferences.Editor editor;
+                editor = MyCompanyId.edit();
+                editor.putString("MyCompanyId", "");
+                editor.apply();
+                intent = new Intent(getApplicationContext(), LoginOption.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
                 break;
         }

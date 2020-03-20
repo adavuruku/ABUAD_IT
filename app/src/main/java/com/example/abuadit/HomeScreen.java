@@ -62,6 +62,7 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
         //retrieve student information
         dbHelper = new dbHelper(getApplicationContext());
 
+
         initNavigationDrawer();
     }
     public void initNavigationDrawer() {
@@ -77,11 +78,24 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                         intent = new Intent(getApplicationContext(), about.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                        finish();
                         break;
                     case R.id.appstatus:
                         intent = new Intent(getApplicationContext(), StudentCompany.class);
-                        intent.putExtra("USERID",userID);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        break;
+                    case R.id.register:
+                        intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        break;
+                    case R.id.close:
+                        SharedPreferences.Editor editor;
+                        editor = MyId.edit();
+                        editor.putString("MyId", "");
+                        editor.apply();
+
+                        intent = new Intent(getApplicationContext(), LoginOption.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         finish();
@@ -143,22 +157,34 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();;
+        int id = item.getItemId();
+        Intent intent;
         switch (id){
             case R.id.about:
-                Intent intent = new Intent(getApplicationContext(), about.class);
+                intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
             case R.id.appstatus:
                 intent = new Intent(getApplicationContext(), StudentCompany.class);
-                intent.putExtra("USERID",userID);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
-//            case R.id.close:
-//                verify_close();
-//                break;
+            case R.id.register:
+                intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case R.id.close:
+                SharedPreferences.Editor editor;
+                editor = MyId.edit();
+                editor.putString("MyId", "");
+                editor.apply();
+
+                intent = new Intent(getApplicationContext(), LoginOption.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }

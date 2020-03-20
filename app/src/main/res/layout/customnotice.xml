@@ -58,7 +58,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/load"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/colorAbuad"
+                android:textColor="@color/colorBlack"
                 android:lineSpacingExtra="6dp" />
 
             <TextView
@@ -79,8 +79,9 @@
                 android:fontFamily="sans-serif-medium"
                 android:lineSpacingExtra="6dp"
                 android:text="@string/load"
+                android:lineHeight="25dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

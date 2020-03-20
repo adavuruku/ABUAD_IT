@@ -316,22 +316,6 @@ public class studentapplication extends Fragment {
         AppSingleton.getInstance(getContext()).addToRequestQueue(postRequest, REQUEST_TAG);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

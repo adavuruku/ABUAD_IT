@@ -76,8 +76,7 @@ public class dbColumnList {
         public static final String TABLE_NAME = "registerList";
         public static final String COLUMN_REGNO = "regNo";
         public static final String COLUMN_COMPANYID = "companyid";
-        public static final String COLUMN_RECORDID = "recordid";
-        public static final String COLUMN_RECORDTYPE = "recordtype";
+        public static final String COLUMN_RECORSTATUS = "recordstatus";
         public static final String COLUMN_DATE = "recordDate";
     }
 

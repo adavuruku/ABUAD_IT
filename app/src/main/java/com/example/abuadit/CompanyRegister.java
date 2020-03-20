@@ -1,28 +1,33 @@
 package com.example.abuadit;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,13 +38,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class ListCompanyITApp extends Fragment {
+public class CompanyRegister extends AppCompatActivity {
+    Button btnApply;
+    DatePickerDialog.OnDateSetListener setListener;
+    int year, month, day;
+    Toolbar toolbar;
     private List<myModels.studentModel> allNoticeList;
     private static int SPLASH_TIME_OUT = 500;//0.5seconds
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -49,40 +61,72 @@ public class ListCompanyITApp extends Fragment {
     private boolean isConnected = false;
     RecyclerView recyclerView;
     private studentAdapter recyclerAdapter;
-    String search, allResult,userID,companyID, regNo;
+    String search, allResult,userID,companyID, regNo, currentDate = "" ;
     ProgressBar progressBar;
     dbHelper dbHelper;
     byte[] byteArray;
     private SharedPreferences MyCompanyId;
     ArrayList<myModels.companyModel> noticeList;
     String address = "http://192.168.1.64/abuadit/abuadrest.php";
-    private OnFragmentInteractionListener mListener;
-
-    public ListCompanyITApp() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_company_register);
 
-    }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        View rootView = inflater.inflate(R.layout.fragment_list_company_itapp, container, false);
+        btnApply = findViewById(R.id.btnApply);
+        Calendar calender = Calendar.getInstance();
+        year = calender.get(Calendar.YEAR);
+        month = calender.get(Calendar.MONTH);
+        day = calender.get(Calendar.DAY_OF_MONTH);
+
+        btnApply.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        CompanyRegister.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        setListener,year, month, day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                month +=1;
+//                currentDate = year+"-"+month+"-"+dayOfMonth;
+                Calendar cal = Calendar.getInstance();
+                cal.set(year,month,dayOfMonth);
+
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                currentDate = df.format(cal.getTime());
+
+                String DATE_FORMAT= "EEE, d MMM yyyy, HH:mm:ss";
+                SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+                String displayDate = dateFormat.format(cal.getTime());
+                btnApply.setText(displayDate);
+
+//                String token = String.format("%1$tA %1$tb %1$td %1$tY",currentDate);
+//                Toast.makeText(CompanyRegister.this,token, Toast.LENGTH_LONG).show();
+            }
+        };
 
 
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        progressBar =  rootView.findViewById(R.id.simpleProgressBar);
+        progressBar =  findViewById(R.id.simpleProgressBar);
 
         allNoticeList = new ArrayList<>();
 
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipeToRefresh);
+        mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -92,7 +136,7 @@ public class ListCompanyITApp extends Fragment {
             }
         });
 
-        MyCompanyId = getActivity().getSharedPreferences("MyCompanyId", getActivity().MODE_PRIVATE);
+        MyCompanyId = this.getSharedPreferences("MyCompanyId", this.MODE_PRIVATE);
         companyID = MyCompanyId.getString("MyCompanyId", "");
 
         new Handler().postDelayed(new Runnable() {
@@ -102,17 +146,14 @@ public class ListCompanyITApp extends Fragment {
             }
         },SPLASH_TIME_OUT);
 
-        pd = new ProgressDialog(getContext());
+        pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Processing Request ...");
         pd.setTitle(R.string.app_name);
         pd.setIcon(R.mipmap.ic_launcher);
         pd.setIndeterminate(true);
         pd.setCancelable(true);
-
-        return rootView;
     }
-
 
     //load local no internet connection
     class LoadLocalData extends AsyncTask<String, Integer, String> {
@@ -121,9 +162,9 @@ public class ListCompanyITApp extends Fragment {
         protected String doInBackground(String... strings) {
 
             try {
-                dbHelper = new dbHelper(getContext());
+                dbHelper = new dbHelper(getApplicationContext());
                 allNoticeList.clear();
-                Cursor allCompany = dbHelper.getAllCompanyApplication(companyID, "0");
+                Cursor allCompany = dbHelper.getAllCompanyApplication(companyID, "2");
                 if (allCompany.getCount() > 0) {
                     while (allCompany.moveToNext()) {
 
@@ -155,8 +196,8 @@ public class ListCompanyITApp extends Fragment {
                                     byteArray,
                                     aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_MODE)),
                                     aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_DEGREE)),
-                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_CONTACTADD)),"",
-                                    allCompany.getString(allCompany.getColumnIndex(dbColumnList.applicationList.COLUMN_ACCEPTSTATUS))
+                                    aStudent.getString(aStudent.getColumnIndex(dbColumnList.abuadstudent.COLUMN_CONTACTADD)),"0",
+                                    "mark"
                             );
                             allNoticeList.add(studentModel);
                         }
@@ -174,22 +215,20 @@ public class ListCompanyITApp extends Fragment {
 
 
     public void loadData(){
-        recyclerAdapter = new studentAdapter( allNoticeList, getContext(), new studentAdapter.OnItemClickListener() {
+        recyclerAdapter = new studentAdapter( allNoticeList, this, new studentAdapter.OnItemClickListener() {
             @Override
             public void onNameClick(View v, int position) {
-                 regNo =  allNoticeList.get(position).getRegno();
-                if (pd.isShowing()){
-                    pd.cancel();
-                    pd.hide();
-                }
-                pd.show();
-                volleyApplicationRequest(address);
 //                Toast.makeText(getContext(),"Welcome "+ postid + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onMarkClick(View v, int position) {
-
+                String sta =  allNoticeList.get(position).getAttendanceStatus();
+                if(sta.equals("1")){
+                    allNoticeList.get(position).setAttendanceStatus("0");
+                }else{
+                    allNoticeList.get(position).setAttendanceStatus("1");
+                }
             }
 
             @Override
@@ -233,10 +272,10 @@ public class ListCompanyITApp extends Fragment {
 
                 TextView pcontact = snackView.findViewById(R.id.pcontact);
                 pcontact.setText(
-                       allNoticeList.get(position).getContactAddress()
+                        allNoticeList.get(position).getContactAddress()
                 );
 
-                final Dialog d = new Dialog(getActivity());
+                final Dialog d = new Dialog(CompanyRegister.this);
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 d.setCanceledOnTouchOutside(true);
                 d.setContentView(snackView);
@@ -250,7 +289,7 @@ public class ListCompanyITApp extends Fragment {
         progressBar.setVisibility(View.GONE);
     }
     public void displayMessage(String msg) {
-        builder = new AlertDialog.Builder(getContext());
+        builder = new AlertDialog.Builder(this);
         builder.setMessage(msg);
         builder.setTitle(R.string.app_name);
         builder.setIcon(R.mipmap.ic_launcher_round);
@@ -265,75 +304,99 @@ public class ListCompanyITApp extends Fragment {
         alert.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
         alert.show();
     }
-    public void volleyApplicationRequest(String url){
-        String  REQUEST_TAG = "com.volley.volleyJsonArrayRequest";
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+
+    //menu settings
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.companymenuregister, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        AlertDialog  alert;
+        switch (id){
+            case R.id.about:
+                Intent intent = new Intent(getApplicationContext(), about.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case R.id.home:
+                intent = new Intent(getApplicationContext(), companyHome.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+                break;
+            case R.id.save:
+                builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are You Sure You Want to Save / Upload this Attendance To the Server ... ?. ");
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     @Override
-                    public void onResponse(String response) {
-                        if (pd.isShowing()){
-                            pd.cancel();
-                            pd.hide();
-                        }
-                        if (response.trim()==""){
-                            displayMessage("Fail To Approve Application. Retry !");
-                        }else{
-                            dbHelper.saveApplication(regNo,companyID,"1");
-                            displayMessage("You Have Successfully Approve The Application. !");
-                            new LoadLocalData().execute();
-                        }
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        submitToLocalServe();
                     }
-                },
-                new Response.ErrorListener()
-                {
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (pd.isShowing()){
-                            pd.cancel();
-                            pd.hide();
-                        }
-                        displayMessage("Fail To Approve Application. Retry !");
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
                     }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("opr", "updateCompanyApplication");
-                params.put("companyID", companyID);
-                params.put("userId", regNo);
-                return params;
+                });
+                alert = builder.create();
+                alert.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+                alert.show();
+                break;
+            case R.id.close:
+
+                SharedPreferences.Editor editor;
+                editor = MyCompanyId.edit();
+                editor.putString("MyCompanyId", "");
+                editor.apply();
+
+                intent = new Intent(getApplicationContext(), LoginOption.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void submitToLocalServe() {
+        if (pd.isShowing()) {
+            pd.hide();
+            pd.cancel();
+        }
+        pd.show();
+        dbHelper = new dbHelper(getApplicationContext());
+        if (!currentDate.equals("")){
+            for (int i = 0; i < allNoticeList.size(); i++) {
+                dbHelper.saveRegister(
+                        allNoticeList.get(i).getRegno(),
+                        companyID,
+                        allNoticeList.get(i).getAttendanceStatus(),
+                        currentDate
+                );
             }
-        };
-        AppSingleton.getInstance(getContext()).addToRequestQueue(postRequest, REQUEST_TAG);
-    }
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            if (pd.isShowing()) {
+                pd.hide();
+                pd.cancel();
+            }
+            displayMessage("Attendance Successfully Uploaded To Local Server !!! ");
+        }else{
+            if (pd.isShowing()) {
+                pd.hide();
+                pd.cancel();
+            }
+            displayMessage("Select A Valid Date For Attendance !!");
         }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
+
     }
 }

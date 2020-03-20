@@ -157,7 +157,7 @@ public class itoffice extends Fragment implements SearchView.OnQueryTextListener
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Toast.makeText(getContext(),"Welcome To ATBU 37 NAMSN ELITE YEAR BOOK",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(),"Welcome To ATBU 37 NAMSN ELITE YEAR BOOK",Toast.LENGTH_LONG).show();
         newText = newText.toLowerCase();
         newList = new ArrayList<>();
         for(myModels.itfOffice  cont : arrayliststat){
