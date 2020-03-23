@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".studentAttendanceRecord"></activity>
+        <activity android:name=".staffHome"></activity>
+        <activity android:name=".staffLogin" />
+        <activity android:name=".studentAttendanceRecord" />
         <activity android:name=".CompanyRegister" />
         <activity android:name=".companyHome" />
         <activity

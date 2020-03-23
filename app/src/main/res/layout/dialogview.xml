@@ -127,6 +127,36 @@
                     android:lineSpacingExtra="6dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/pit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorBlack"
+                    android:lineSpacingExtra="6dp"
+                    android:background="@color/loginColor"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pitphoneemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+                <TextView
+                    android:id="@+id/pitaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load"
+                    android:textColor="@color/colorText"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

@@ -32,27 +32,27 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CompanyLogin extends AppCompatActivity {
+public class staffLogin extends AppCompatActivity {
 
     Button login;
     TextView userid, password;
     ProgressDialog pd;
     AlertDialog.Builder builder;
-//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+    //    String address = "http://192.168.1.64/abuadit/abuadrest.php";
     String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     String allResult, userName, userPassword, studentName;
-    SharedPreferences MyCompanyId;
+    SharedPreferences MyStaffId;
     public byte[] byteArray=null;
     private dbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company_login);
+        setContentView(R.layout.activity_staff_login);
         Button login = findViewById(R.id.btnSave);
         userid  = findViewById(R.id.userid);
         password  = findViewById(R.id.password);
 
-        MyCompanyId = this.getSharedPreferences("MyCompanyId", this.MODE_PRIVATE);
+        MyStaffId = this.getSharedPreferences("MyStaffId", this.MODE_PRIVATE);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +80,10 @@ public class CompanyLogin extends AppCompatActivity {
 
 
     public void displayMessage(String msg) {
+        if(pd.isShowing()){
+            pd.cancel();
+            pd.hide();
+        }
         builder = new AlertDialog.Builder(this);
         builder.setMessage(msg);
         builder.setTitle(R.string.app_name);
@@ -113,6 +117,7 @@ public class CompanyLogin extends AppCompatActivity {
                             displayMessage("Error: Wrong Username Or Password !!!");
                         }else{
                             allResult = response;
+//                            Toast.makeText(getApplicationContext(), response ,Toast.LENGTH_LONG).show();
                             new ReadJSON().execute();
                         }
                     }
@@ -132,7 +137,7 @@ public class CompanyLogin extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("opr", "loginCompany");
+                params.put("opr", "loginStaff");
                 params.put("userID", userName);
                 params.put("userPassword", userPassword);
                 return params;
@@ -154,19 +159,21 @@ public class CompanyLogin extends AppCompatActivity {
                 //must be arranged exact way it comes from server
                 dbHelper = new dbHelper(getApplicationContext());
 
-                studentName =  jsonobject.getString("companyName");
-
-                dbHelper.SaveCompanyInformation(
-                        jsonobject.getString("companyName"),jsonobject.getString("companyPhone"),
-                        jsonobject.getString("companyEmail"),jsonobject.getString("companyAddress"),
-                        jsonobject.getString("companyDescription"),jsonobject.getString("companyState"),
-                        jsonobject.getString("companyLocalGov"),jsonobject.getString("companyId")
+                studentName = jsonobject.getString("fullname");
+                dbHelper.saveLecturerInformation(
+                        jsonobject.getString("staffid"),
+                        jsonobject.getString("fullname"),
+                        jsonobject.getString("faculty"),
+                        jsonobject.getString("department"),
+                        jsonobject.getString("phone"),
+                        jsonobject.getString("email"),
+                        jsonobject.getString("staffaddress")
                 );
 
 
                 //userID
-                editor = MyCompanyId.edit();
-                editor.putString("MyCompanyId",jsonobject.getString("companyId"));
+                editor = MyStaffId.edit();
+                editor.putString("MyStaffId",jsonobject.getString("staffid"));
                 editor.apply();
 
 
@@ -184,7 +191,7 @@ public class CompanyLogin extends AppCompatActivity {
                     pd.hide();
                 }
                 Toast.makeText(getApplicationContext(),"Welcome "+ studentName + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplication(), companyHome.class);
+                Intent intent = new Intent(getApplication(), staffHome.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
@@ -208,24 +215,17 @@ public class CompanyLogin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Intent intent;
         switch (id) {
             case R.id.about:
-                intent = new Intent(getApplicationContext(), about.class);
+                Intent intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
             case R.id.close:
-                SharedPreferences.Editor editor;
-                editor = MyCompanyId.edit();
-                editor.putString("MyCompanyId", "");
-                editor.apply();
-                intent = new Intent(getApplicationContext(), LoginOption.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 }
+

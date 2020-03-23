@@ -15,7 +15,7 @@ public class dbHelper extends SQLiteOpenHelper {
     // Database Info
     public static final String DATABASE_NAME = "ABUADOOO.db";
     public static final String DBLOCATION = "/data/data/com.example.abuadit/databases/";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private Context mcontext;
     private SQLiteDatabase mdatabase;
 
@@ -311,6 +311,16 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    public Cursor getAllStaffITStudent(String staffID){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.query(dbColumnList.abuadItInformation.TABLE_NAME,
+                null,
+                dbColumnList.abuadItInformation.COLUMN_STAFFID + " = ? ",
+                new String[]{staffID},
+                null,
+                null,null);
+    }
+
 //    *************************************************************************
 //*********************** NOTICE ***********************************************************
 
@@ -470,12 +480,12 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,
                 null,dbColumnList.registerList.COLUMN_DATE + " desc");
     }
-    public Cursor getAllStudentAttendanceByDate(String dateAttend){
+    public Cursor getAllAttendance(){
         SQLiteDatabase database = getReadableDatabase();
         return database.query(dbColumnList.registerList.TABLE_NAME,
                 null,
-                dbColumnList.registerList.COLUMN_DATE + " = ?",
-                new String[]{dateAttend},
+                null,
+                null,
                 null,
                 null,dbColumnList.registerList.COLUMN_DATE + " desc");
     }

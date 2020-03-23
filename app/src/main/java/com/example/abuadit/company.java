@@ -65,7 +65,8 @@ public class company extends Fragment {
     dbHelper dbHelper;
     private SharedPreferences MyId;
     ArrayList<myModels.companyModel> noticeList;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+    String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

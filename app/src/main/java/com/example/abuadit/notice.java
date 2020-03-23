@@ -61,7 +61,8 @@ public class notice extends Fragment {
     String search, allResult;
     ProgressBar progressBar;
     ArrayList<myModels.notice> noticeList;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

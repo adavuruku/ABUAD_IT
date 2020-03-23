@@ -60,7 +60,8 @@ public class ListCompanyITStudent extends Fragment {
     byte[] byteArray;
     private SharedPreferences MyCompanyId;
     ArrayList<myModels.companyModel> noticeList;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     private OnFragmentInteractionListener mListener;
 
     public ListCompanyITStudent() {
@@ -125,7 +126,7 @@ public class ListCompanyITStudent extends Fragment {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.trim() == ""){
+                        if (response.trim().length() <= 2){
                             new LoadLocalData().execute();
                         }else{
                             allResult = response;
@@ -180,8 +181,7 @@ public class ListCompanyITStudent extends Fragment {
                             jsonobject.getString("itLevel")
                     );
 
-                    String MyPics = "http://192.168.1.64/abuadit/resource/"+jsonobject.getString("profilePics");
-
+                    String MyPics ="https://abuadit.000webhostapp.com/resource/"+jsonobject.getString("profilePics");
                     Bitmap bitmap =  Picasso.get().load(MyPics).get();
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -328,7 +328,7 @@ public class ListCompanyITStudent extends Fragment {
                         allNoticeList.get(position).getStudEmail() + " / "+ allNoticeList.get(position).getStudPhone()
                 );
 
-                TextView pmodetype = snackView.findViewById(R.id.pemailphone);
+                TextView pmodetype = snackView.findViewById(R.id.pmodetype);
                 pmodetype.setText(
                         allNoticeList.get(position).getMode() + " / "+ allNoticeList.get(position).getDegree()
                 );
@@ -342,6 +342,13 @@ public class ListCompanyITStudent extends Fragment {
                 pcontact.setText(
                         allNoticeList.get(position).getContactAddress()
                 );
+
+                TextView pitphoneemail = snackView.findViewById(R.id.pitphoneemail);
+                pitphoneemail.setVisibility(View.GONE);
+                TextView pitaddress = snackView.findViewById(R.id.pitaddress);
+                pitaddress.setVisibility(View.GONE);
+                TextView pit = snackView.findViewById(R.id.pit);
+                pit.setVisibility(View.GONE);
 
                 final Dialog d = new Dialog(getActivity());
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);

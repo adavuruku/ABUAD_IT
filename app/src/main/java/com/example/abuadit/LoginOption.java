@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class LoginOption extends AppCompatActivity {
-    private SharedPreferences MyId,MyCompanyId;
+    private SharedPreferences MyId,MyCompanyId,MyStaffId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,15 +20,31 @@ public class LoginOption extends AppCompatActivity {
         Button staffLogin = findViewById(R.id.btnStaff);
         Button companyLogin = findViewById(R.id.btnCompany);
 
-        MyId = this.getSharedPreferences("MyId", this.MODE_PRIVATE);
-        final String userID = MyId.getString("MyId", "");
 
+
+        MyStaffId = this.getSharedPreferences("MyStaffId", this.MODE_PRIVATE);
+        final String staffId= MyStaffId.getString("MyStaffId", "");
         staffLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (staffId.equals("")){
+                    Intent intent = new Intent(getApplicationContext(), staffLogin.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                }else{
+                    Intent intent = new Intent(getApplication(), staffHome.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                }
+
             }
         });
+
+        MyId = this.getSharedPreferences("MyId", this.MODE_PRIVATE);
+        final String userID = MyId.getString("MyId", "");
         studLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,6 +52,7 @@ public class LoginOption extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
                 }else{
                     Intent intent = new Intent(getApplication(), HomeScreen.class);
                     startActivity(intent);

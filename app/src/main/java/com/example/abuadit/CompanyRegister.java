@@ -67,7 +67,8 @@ public class CompanyRegister extends AppCompatActivity {
     byte[] byteArray;
     private SharedPreferences MyCompanyId;
     ArrayList<myModels.companyModel> noticeList;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

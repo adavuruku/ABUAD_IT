@@ -70,7 +70,8 @@ public class studentAttendanceRecord extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressBar progressBar;
     SwipeRefreshLayout mSwipeRefreshLayout;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,7 +185,7 @@ public class studentAttendanceRecord extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.trim() == ""){
-//                            new ListCompanyITStudent.LoadLocalData().execute();
+                            new LoadLocalData().execute();
                         }else{
                             allResult = response;
                             new ReadJSON().execute();
@@ -195,7 +196,7 @@ public class studentAttendanceRecord extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        new LoadLocalData().execute();
+                        new LoadLocalData().execute();
                     }
                 }
         ) {

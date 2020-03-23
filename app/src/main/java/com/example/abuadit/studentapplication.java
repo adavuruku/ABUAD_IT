@@ -58,8 +58,8 @@ public class studentapplication extends Fragment {
     dbHelper dbHelper;
     private SharedPreferences MyId;
     ArrayList<myModels.companyModel> noticeList;
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
-
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +113,10 @@ public class studentapplication extends Fragment {
     }
 
     public void displayMessage(String msg) {
+        if(pd.isShowing()){
+            pd.cancel();
+            pd.hide();
+        }
         builder = new AlertDialog.Builder(getContext());
         builder.setMessage(msg);
         builder.setTitle(R.string.app_name);

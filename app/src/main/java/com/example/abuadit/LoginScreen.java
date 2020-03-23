@@ -39,9 +39,8 @@ public class LoginScreen extends AppCompatActivity {
     TextView userid, password;
     ProgressDialog pd;
     AlertDialog.Builder builder;
-    // String address = "http://192.168.230.1/attendance/androidNamsn.php";
-    String address = "http://192.168.1.64/abuadit/abuadrest.php";
-//    String address = "http://192.168.137.1/abuadit/abuadrest.php";
+//    String address = "http://192.168.1.64/abuadit/abuadrest.php";
+    String address = "https://abuadit.000webhostapp.com/abuadrest.php";
     String allResult, userName, userPassword, studentName;
     SharedPreferences MyId;
     public byte[] byteArray=null;
@@ -82,6 +81,10 @@ public class LoginScreen extends AppCompatActivity {
 
 
     public void displayMessage(String msg) {
+        if(pd.isShowing()){
+            pd.hide();
+            pd.cancel();
+        }
         builder = new AlertDialog.Builder(this);
         builder.setMessage(msg);
         builder.setTitle(R.string.app_name);
@@ -115,6 +118,7 @@ public class LoginScreen extends AppCompatActivity {
                             displayMessage("Error: Wrong Username Or Password !!!");
                         }else{
                             allResult = response;
+//                            Toast.makeText(getApplicationContext(), response ,Toast.LENGTH_LONG).show();
                             new ReadJSON().execute();
                         }
                     }
@@ -187,8 +191,7 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("companyDescription"),jsonobject.getString("companyState"),
                         jsonobject.getString("companyLocalGov"),jsonobject.getString("companyId")
                 );
-                String MyPics = "http://192.168.1.64/abuadit/resource/"+jsonobject.getString("profilePics");
-
+                String MyPics ="https://abuadit.000webhostapp.com/resource/"+jsonobject.getString("profilePics");
                 Bitmap bitmap =  Picasso.get().load(MyPics).get();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -216,7 +219,7 @@ public class LoginScreen extends AppCompatActivity {
                     pd.cancel();
                     pd.hide();
                 }
-                Toast.makeText(getApplicationContext(),"Welcome "+ studentName + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),"Welcome "+ studentName + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplication(), HomeScreen.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
