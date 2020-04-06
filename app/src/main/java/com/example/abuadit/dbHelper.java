@@ -107,7 +107,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
         String CREATE_TABLE_PROFILEPICS= "CREATE TABLE IF NOT EXISTS " + dbColumnList.userProfilePics.TABLE_NAME +
                 "(" +
-                    dbColumnList.registerList._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
+                    dbColumnList.userProfilePics._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Define a primary key
                     dbColumnList.userProfilePics.COLUMN_REGNO + " VARCHAR, " +
                     dbColumnList.userProfilePics.COLUMN_PROFILEPICS + " blob " +
                 ")";

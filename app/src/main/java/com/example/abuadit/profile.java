@@ -143,7 +143,7 @@ public class profile extends Fragment {
         Calendar start = Calendar.getInstance();
         Calendar end = Calendar.getInstance();
         try {
-            start.setTime(sdf.parse(startDate));
+//            start.setTime(sdf.parse(startDate));
             end.setTime(sdf.parse(endDate));
         } catch (ParseException e) {
             e.printStackTrace();
