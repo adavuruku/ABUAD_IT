@@ -82,7 +82,7 @@
                     android:lineSpacingExtra="6dp"
                     android:text="@string/load"
                     android:textAllCaps="true"
-                    android:layout_gravity="center_horizontal"
+                    android:justificationMode="inter_word"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
 
@@ -111,8 +111,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif-medium"
-                    android:lineSpacingExtra="6dp"
                     android:lineHeight="25dp"
+                    android:minLines="2"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingExtra="10dp"
                     android:text="@string/load"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorText">
