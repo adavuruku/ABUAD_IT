@@ -304,7 +304,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 
             @Override
             public void onImageClick(View v, int position) {
-                View snackView = getLayoutInflater().inflate(R.layout.dialogview, null);
+                View snackView = getLayoutInflater().inflate(R.layout.customlearn, null);
 
                 ImageView imv = snackView.findViewById(R.id.profile_pic);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(allNoticeList.get(position).getProfilePic(), 0,allNoticeList.get(position).getProfilePic().length);
