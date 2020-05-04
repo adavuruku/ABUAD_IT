@@ -1,0 +1,36 @@
+<com.google.android.material.appbar.SubtitleCollapsingToolbarLayout android:id="@+id/collapsing"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    android:background="@color/colorAbuad"
+    app:contentScrim="?attr/colorPrimary"
+    app:title="ABUAD - ADO EKITI"
+    app:subtitle="@string/subtitle"
+    app:expandedTitleMarginStart="6dp"
+    app:expandedTitleMarginEnd="8dp"
+    app:expandedTitleTextAppearance="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/abuad"
+        app:layout_collapseMode="parallax"
+        tools:ignore="ContentDescription" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp"
+
+        />
+</com.google.android.material.appbar.SubtitleCollapsingToolbarLayout>

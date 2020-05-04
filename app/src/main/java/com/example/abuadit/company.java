@@ -136,7 +136,7 @@ public class company extends Fragment {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.length()<=0){
+                        if (response.length()<=2){
                             new LoadLocalData().execute();
                         }else{
                             allResult = response;

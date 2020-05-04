@@ -48,8 +48,8 @@ public class staffHome extends AppCompatActivity implements ListStaffITAttendanc
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        if(getSupportActionBar()!=null)
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         MyStaffId = getSharedPreferences("MyStaffId",this.MODE_PRIVATE);

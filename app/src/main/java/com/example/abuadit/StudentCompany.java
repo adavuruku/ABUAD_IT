@@ -69,6 +69,7 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
 
     public void initNavigationDrawer() {
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {

@@ -140,7 +140,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.trim() == ""){
+                        if (response.length()<=2){
                             new LoadLocalData().execute();
                         }else{
                             allResult = response;
@@ -287,7 +287,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                             pd.cancel();
                             pd.hide();
                         }
-                        if (response.trim()==""){
+                        if (response.length()<=2){
                             displayMessage("Fail To Accept Offer. Retry !");
                         }else{
                             dbHelper.saveApplication(userID,companyID,"2");

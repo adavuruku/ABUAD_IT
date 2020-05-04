@@ -50,8 +50,8 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        if(getSupportActionBar()!=null)
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         MyCompanyId = getSharedPreferences("MyCompanyId",this.MODE_PRIVATE);

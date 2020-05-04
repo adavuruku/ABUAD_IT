@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class profile extends Fragment {
@@ -93,11 +94,27 @@ public class profile extends Fragment {
             companyID = ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_COMPANYID));
             staffID = ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_STAFFID));
             if(ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART)).length() > 0){
-                String dateDif = monthsBetweenDates(ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART)),
-                        ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATEEND)));
+
+
+                String DATE_FORMAT= "yyyy-MM-dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
+
+                try {
+                    Date END = sdf.parse(
+                            ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATEEND))
+                    );
+
+
+
+                String dateDif = monthsBetweenDates(END);
                 ileft.setText("Left : " + dateDif);
                 istart.setText("Start Date : " + ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART)));
                 iend.setText("End Date : " +ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATEEND)));
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -138,23 +155,42 @@ public class profile extends Fragment {
     }
 
 
-    public String monthsBetweenDates(String startDate, String endDate){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar start = Calendar.getInstance();
-        Calendar end = Calendar.getInstance();
-        try {
-//            start.setTime(sdf.parse(startDate));
-            end.setTime(sdf.parse(endDate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public String monthsBetweenDates(Date endDate){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Calendar endCalender = Calendar.getInstance();
+        Calendar todayCalender = Calendar.getInstance();
+        endCalender.setTimeInMillis(endDate.getTime());
+        Date today = new Date();
+        todayCalender.setTimeInMillis(today.getTime());
 
-        long msDiff = end.getTimeInMillis() - start.getTimeInMillis();
-        long week = msDiff / (1000*60*60*24*7);
-        Calendar calDiff = Calendar.getInstance();
-        calDiff.setTimeInMillis(msDiff);
+        int sYear = endCalender.get(Calendar.YEAR);
+        int sMonth = endCalender.get(Calendar.MONTH);
+        int sDay = endCalender.get(Calendar.DAY_OF_MONTH);
 
-        return calDiff.get(Calendar.YEAR) - 1970 + " Year, " + calDiff.get(Calendar.MONTH) +" Months, " + week +" Weeks, " + calDiff.get(Calendar.DAY_OF_MONTH) +" Days";
+        int tYear = todayCalender.get(Calendar.YEAR);
+        int tMonth = todayCalender.get(Calendar.MONTH);
+        int tDay = todayCalender.get(Calendar.DAY_OF_MONTH);
+
+
+        Calendar date1 = Calendar.getInstance();
+        Calendar date2 = Calendar.getInstance();
+
+        date1.clear();
+        date1.set(sYear, sMonth, sDay);
+
+        date2.clear();
+        date2.set(tYear, tMonth, tDay);
+
+        long diff = date1.getTimeInMillis() - date2.getTimeInMillis();
+        int dayCount,monthCount,weekCount;
+        dayCount = (int) (diff / (24 * 60 * 60 * 1000));
+        weekCount = (int) (diff / (7 * 24 * 60 * 60 * 1000));
+        weekCount += (diff % (7 * 24 * 60 * 60 * 1000)) > 0 ? 1:0;
+        monthCount = (int) (diff / (2419200000f));
+        monthCount += (diff % (2419200000f)) > 0 ? 1:0;
+
+
+        return monthCount +" Months, " + weekCount +" Weeks, " + dayCount +" Days";
     }
 
 

@@ -319,6 +319,9 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
         int id = item.getItemId();
         AlertDialog  alert;
         switch (id){
+            case android.R.id.home:
+                onBackPressed();
+                break;
             case R.id.about:
                 Intent intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);

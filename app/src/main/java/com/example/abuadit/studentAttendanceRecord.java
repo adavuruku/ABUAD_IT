@@ -184,7 +184,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.trim() == ""){
+                        if (response.length() <=2){
                             new LoadLocalData().execute();
                         }else{
                             allResult = response;
@@ -220,11 +220,11 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
             try {
                 dbHelper = new dbHelper(getApplicationContext());
                 allNoticeList.clear();
+                dbHelper.deleteAttendace();
                 JSONArray jsonarray = new JSONArray(allResult);
                 for (int i = 0; i < jsonarray.length(); i++) {
                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                     //empty all existing attendance on db
-                    dbHelper.deleteAttendace();
                     dbHelper.saveRegister(
                             userID,
                             jsonobject.getString("companyId"),
@@ -293,6 +293,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 
     public void initNavigationDrawer() {
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
