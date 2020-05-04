@@ -114,7 +114,7 @@ public class LoginScreen extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.length()<=0){
+                        if (response.length()<=2){
                             displayMessage("Error: Wrong Username Or Password !!!");
                         }else{
                             allResult = response;
@@ -162,6 +162,8 @@ public class LoginScreen extends AppCompatActivity {
 
                 studentName = jsonobject.getString("studName");
 
+                //empty all existing student record
+                dbHelper.deleteStudent();
                 dbHelper.saveStudentInformation(
                         jsonobject.getString("regno"),jsonobject.getString("studName"),
                         jsonobject.getString("studFaculty"),jsonobject.getString("studDept"),
@@ -172,6 +174,7 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("itLevel")
                 );
 
+                dbHelper.deleteLeturer();
                 dbHelper.saveLecturerInformation(
                         jsonobject.getString("staffid"),jsonobject.getString("lecturerName"),
                         jsonobject.getString("lecturerFaculty"),jsonobject.getString("lecturerDept"),
@@ -179,12 +182,14 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("staffaddress")
                 );
 
+                dbHelper.deleteItInformation();
                 dbHelper.saveITInformation(
                         jsonobject.getString("regno"),jsonobject.getString("startDate"),
                         jsonobject.getString("endDate"),jsonobject.getString("duration"),
                         jsonobject.getString("staffid"),jsonobject.getString("companyId")
                 );
 
+                dbHelper.deleteCompany();
                 dbHelper.SaveCompanyInformation(
                         jsonobject.getString("companyName"),jsonobject.getString("companyPhone"),
                         jsonobject.getString("companyEmail"),jsonobject.getString("companyAddress"),
@@ -197,13 +202,18 @@ public class LoginScreen extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byteArray = stream.toByteArray();
 
+                dbHelper.deleteProfilePics();
                 dbHelper.saveProfilePics(jsonobject.getString("regno"),
                         byteArray );
 
+                //empty all other preferences
                 //userID
                 editor = MyId.edit();
                 editor.putString("MyId",jsonobject.getString("regno"));
                 editor.apply();
+
+                getApplicationContext().getSharedPreferences("MyStaffId",0).edit().clear().apply();
+                getApplicationContext().getSharedPreferences("MyCompanyId",0).edit().clear().apply();
 
 
             } catch (JSONException | IOException e) {

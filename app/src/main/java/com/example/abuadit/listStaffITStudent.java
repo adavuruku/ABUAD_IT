@@ -127,7 +127,7 @@ public class listStaffITStudent extends Fragment {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.trim() == ""){
+                        if (response.length() <= 2){
                             new LoadLocalData().execute();
                         }else{
                             allResult = response;
@@ -162,6 +162,13 @@ public class listStaffITStudent extends Fragment {
 
             try {
                 dbHelper = new dbHelper(getContext());
+
+                //empty all existing record in db
+                dbHelper.deleteStudent();
+                dbHelper.deleteCompany();
+                dbHelper.deleteItInformation();
+                dbHelper.deleteProfilePics();
+
                 allNoticeList.clear();
                 JSONArray jsonarray = new JSONArray(allResult);
                 for (int i = 0; i < jsonarray.length(); i++) {

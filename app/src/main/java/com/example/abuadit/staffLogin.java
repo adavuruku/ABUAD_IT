@@ -113,7 +113,7 @@ public class staffLogin extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.length()<=0){
+                        if (response.length()<=2){
                             displayMessage("Error: Wrong Username Or Password !!!");
                         }else{
                             allResult = response;
@@ -159,6 +159,7 @@ public class staffLogin extends AppCompatActivity {
                 //must be arranged exact way it comes from server
                 dbHelper = new dbHelper(getApplicationContext());
 
+                dbHelper.deleteLeturer();
                 studentName = jsonobject.getString("fullname");
                 dbHelper.saveLecturerInformation(
                         jsonobject.getString("staffid"),
@@ -175,6 +176,9 @@ public class staffLogin extends AppCompatActivity {
                 editor = MyStaffId.edit();
                 editor.putString("MyStaffId",jsonobject.getString("staffid"));
                 editor.apply();
+
+                getApplicationContext().getSharedPreferences("MyId",0).edit().clear().apply();
+                getApplicationContext().getSharedPreferences("MyCompanyId",0).edit().clear().apply();
 
 
             } catch (JSONException e) {

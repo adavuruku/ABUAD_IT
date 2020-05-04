@@ -109,7 +109,7 @@ public class CompanyLogin extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        if (response.length()<=0){
+                        if (response.length()<=2){
                             displayMessage("Error: Wrong Username Or Password !!!");
                         }else{
                             allResult = response;
@@ -153,7 +153,7 @@ public class CompanyLogin extends AppCompatActivity {
                 JSONObject jsonobject = new JSONObject(allResult);
                 //must be arranged exact way it comes from server
                 dbHelper = new dbHelper(getApplicationContext());
-
+                dbHelper.deleteCompany();
                 studentName =  jsonobject.getString("companyName");
 
                 dbHelper.SaveCompanyInformation(
@@ -169,6 +169,8 @@ public class CompanyLogin extends AppCompatActivity {
                 editor.putString("MyCompanyId",jsonobject.getString("companyId"));
                 editor.apply();
 
+                getApplicationContext().getSharedPreferences("MyId",0).edit().clear().apply();
+                getApplicationContext().getSharedPreferences("MyStaffId",0).edit().clear().apply();
 
             } catch (JSONException e) {
                 e.printStackTrace();

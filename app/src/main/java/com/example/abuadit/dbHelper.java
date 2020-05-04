@@ -192,6 +192,13 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    //delete all company
+    public void deleteCompany(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.abuadCompany.TABLE_NAME,
+                null,null);
+    }
+
     //*******************Student Start****************************************************
 
     public Cursor verifyStudentExist(String regno){
@@ -237,6 +244,13 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,
                 null,null);
     }
+
+    //delete all student
+    public void deleteStudent(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.abuadstudent.TABLE_NAME,
+                null,null);
+    }
     //*********************************LECTURERS*************************************************
 
 
@@ -276,6 +290,12 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    //delete all student
+    public void deleteLeturer(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.abuadLecturer.TABLE_NAME,
+                null,null);
+    }
     //*********************** IT INFORMATION ***********************************************************
 
     public Cursor verifyInformationExist(String regno){
@@ -321,6 +341,12 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    //delete all student
+    public void deleteItInformation(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.abuadItInformation.TABLE_NAME,
+                null,null);
+    }
 //    *************************************************************************
 //*********************** NOTICE ***********************************************************
 
@@ -400,6 +426,12 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    //delete all student
+    public void deleteProfilePics(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.userProfilePics.TABLE_NAME,
+                null,null);
+    }
 
     //    **************************PROFILE PICS********************************
 
@@ -444,7 +476,12 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
-
+    //delete all student
+    public void deleteApplication(){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(dbColumnList.applicationList.TABLE_NAME,
+                null,null);
+    }
 
 
 

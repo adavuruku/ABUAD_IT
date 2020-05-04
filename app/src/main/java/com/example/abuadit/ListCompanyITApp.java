@@ -277,7 +277,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                             pd.cancel();
                             pd.hide();
                         }
-                        if (response.trim()==""){
+                        if (response.length()<=2){
                             displayMessage("Fail To Approve Application. Retry !");
                         }else{
                             dbHelper.saveApplication(regNo,companyID,"1");

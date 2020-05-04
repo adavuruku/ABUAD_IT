@@ -162,6 +162,9 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
             try {
                 dbHelper = new dbHelper(getContext());
                 allNoticeList.clear();
+                dbHelper.deleteApplication();
+                dbHelper.deleteStudent();
+                dbHelper.deleteProfilePics();
                 JSONArray jsonarray = new JSONArray(allResult);
                 for (int i = 0; i < jsonarray.length(); i++) {
                     JSONObject jsonobject = jsonarray.getJSONObject(i);
