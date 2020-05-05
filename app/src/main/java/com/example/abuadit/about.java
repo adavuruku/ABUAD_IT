@@ -19,12 +19,7 @@ public class about extends AppCompatActivity {
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    public void onBackPressed() {
-////        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
-////        startActivity(intent);
-////        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-//        finish();
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
