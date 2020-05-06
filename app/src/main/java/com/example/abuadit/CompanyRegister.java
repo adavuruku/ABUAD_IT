@@ -234,7 +234,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 
             @Override
             public void onImageClick(View v, int position) {
-                View snackView = getLayoutInflater().inflate(R.layout.dialogview, null);
+                View snackView = getLayoutInflater().inflate(R.layout.customlearn, null);
 
                 ImageView imv = snackView.findViewById(R.id.profile_pic);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(allNoticeList.get(position).getProfilePic(), 0,allNoticeList.get(position).getProfilePic().length);
@@ -275,6 +275,13 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                 pcontact.setText(
                         allNoticeList.get(position).getContactAddress()
                 );
+
+                TextView pitphoneemail = snackView.findViewById(R.id.pitphoneemail);
+                pitphoneemail.setVisibility(View.GONE);
+                TextView pitaddress = snackView.findViewById(R.id.pitaddress);
+                pitaddress.setVisibility(View.GONE);
+                TextView pit = snackView.findViewById(R.id.pit);
+                pit.setVisibility(View.GONE);
 
                 final Dialog d = new Dialog(CompanyRegister.this);
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);

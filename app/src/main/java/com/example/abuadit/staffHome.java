@@ -130,6 +130,13 @@ public class staffHome extends AppCompatActivity implements ListStaffITAttendanc
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
+            case R.id.website:
+                Intent i = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://abuadit.000webhostapp.com")
+                );
+                startActivity(i);
+                break;
             case R.id.close:
 
                 SharedPreferences.Editor editor;

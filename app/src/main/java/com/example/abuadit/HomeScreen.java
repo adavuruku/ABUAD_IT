@@ -96,6 +96,7 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                                 Uri.parse("https://abuadit.000webhostapp.com")
                         );
                         startActivity(i);
+                        break;
                     case R.id.close:
                         SharedPreferences.Editor editor;
                         editor = MyId.edit();
@@ -188,6 +189,7 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                         Uri.parse("https://abuadit.000webhostapp.com")
                 );
                 startActivity(i);
+                break;
             case R.id.close:
                 SharedPreferences.Editor editor;
                 editor = MyId.edit();

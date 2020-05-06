@@ -101,6 +101,7 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
                                 Uri.parse("https://abuadit.000webhostapp.com")
                         );
                         startActivity(i);
+                        break;
                     case R.id.close:
                         SharedPreferences.Editor editor;
                         editor = MyId.edit();
@@ -196,6 +197,7 @@ public class StudentCompany extends AppCompatActivity implements company.OnFragm
                         Uri.parse("https://abuadit.000webhostapp.com")
                 );
                 startActivity(i);
+                break;
             case R.id.close:
                 SharedPreferences.Editor editor;
                 editor = MyId.edit();

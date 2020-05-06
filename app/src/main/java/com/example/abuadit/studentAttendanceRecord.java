@@ -328,6 +328,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                                 Uri.parse("https://abuadit.000webhostapp.com")
                         );
                         startActivity(i);
+                        break;
                     case R.id.close:
                         SharedPreferences.Editor editor;
                         editor = MyId.edit();
@@ -424,6 +425,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                         Uri.parse("https://abuadit.000webhostapp.com")
                 );
                 startActivity(i);
+                break;
             case R.id.close:
                 SharedPreferences.Editor editor;
                 editor = MyId.edit();
