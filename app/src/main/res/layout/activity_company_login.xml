@@ -47,7 +47,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium">
-
+<!--            ABUAD194878564-->
             <EditText
                 android:id="@+id/userid"
                 android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                 android:drawablePadding="8dp"
                 android:inputType="text"
                 android:lines="1"
-                android:text="ABUAD194878564"
+                android:text=""
                 android:longClickable="true"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
@@ -72,7 +72,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium">
-
+<!--            12345-->
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
@@ -81,7 +81,6 @@
                 android:drawablePadding="8dp"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:text="12345"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
                 android:textSize="18dp" />

@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -318,6 +319,12 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 //                        startActivity(intent);
 //                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
 //                        break;
+                    case R.id.website:
+                        Intent i = new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://abuadit.000webhostapp.com")
+                        );
+                        startActivity(i);
                     case R.id.close:
                         SharedPreferences.Editor editor;
                         editor = MyId.edit();
@@ -408,6 +415,12 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
                 break;
+            case R.id.website:
+                Intent i = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://abuadit.000webhostapp.com")
+                );
+                startActivity(i);
             case R.id.close:
                 SharedPreferences.Editor editor;
                 editor = MyId.edit();

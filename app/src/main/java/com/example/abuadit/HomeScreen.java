@@ -90,6 +90,12 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                         startActivity(intent);
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         break;
+                    case R.id.website:
+                        Intent i = new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://abuadit.000webhostapp.com")
+                        );
+                        startActivity(i);
                     case R.id.close:
                         SharedPreferences.Editor editor;
                         editor = MyId.edit();
@@ -176,6 +182,12 @@ public class HomeScreen extends AppCompatActivity implements itoffice.OnFragment
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
+            case R.id.website:
+                Intent i = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://abuadit.000webhostapp.com")
+                );
+                startActivity(i);
             case R.id.close:
                 SharedPreferences.Editor editor;
                 editor = MyId.edit();

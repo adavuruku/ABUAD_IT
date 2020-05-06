@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_list"
             android:title="@string/menu_register" />
         <item
+            android:id="@+id/website"
+            android:icon="@drawable/ic_website"
+            android:title="@string/menu_website" />
+        <item
             android:id="@+id/about"
             android:icon="@drawable/ic_edit"
             android:title="@string/menu_about" />

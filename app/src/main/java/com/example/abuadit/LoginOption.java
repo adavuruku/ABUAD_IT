@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,6 +99,13 @@ public class LoginOption extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), about.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                break;
+            case R.id.website:
+                Intent i = new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://abuadit.000webhostapp.com")
+                );
+                startActivity(i);
                 break;
             case R.id.close:
                 finish();

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -260,6 +261,12 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 break;
+            case R.id.website:
+                Intent i = new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://abuadit.000webhostapp.com")
+                );
+                startActivity(i);
             case R.id.close:
                 finish();
                 break;
