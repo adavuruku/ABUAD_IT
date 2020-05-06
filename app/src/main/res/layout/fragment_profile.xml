@@ -174,21 +174,20 @@
 
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/company"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:contentPadding="2dp"
                     app:layout_anchorGravity="bottom"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardUseCompatPadding="true"
+                    app:cardCornerRadius="5dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="5dp"
                     android:layout_marginBottom="5dp"
                     android:clickable="true"
-                    card_view:cardBackgroundColor="@android:color/white">
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="390dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/touch_selector"
                         android:orientation="vertical"
@@ -198,46 +197,51 @@
                             android:id="@+id/ctitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="sans-serif-medium"
                             android:text="IT PLACEMENT INFORMATION"
                             android:textColor="@color/colorBlack"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="sans-serif-medium"/>
-                        <TextView android:id="@+id/cname"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/cname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="@string/load"
-                            android:textColor="@color/colorText"
+                            android:fontFamily="sans-serif-medium"
                             android:lineSpacingExtra="6dp"
-                            android:fontFamily="sans-serif-medium"/>
+                            android:text="@string/load"
+                            android:textColor="@color/colorText" />
+
                         <TextView
                             android:id="@+id/cemailphone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/load"
-                            android:textColor="@color/colorText"
-                            android:lineSpacingExtra="6dp"
                             android:layout_marginBottom="5dp"
-                            android:fontFamily="sans-serif-medium"/>
+                            android:fontFamily="sans-serif-medium"
+                            android:lineSpacingExtra="6dp"
+                            android:text="@string/load"
+                            android:textColor="@color/colorText" />
+
                         <TextView
                             android:id="@+id/cstatelgov"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="@string/load"
-                            android:textColor="@color/colorText"
+                            android:fontFamily="sans-serif-medium"
                             android:lineSpacingExtra="6dp"
-                            android:fontFamily="sans-serif-medium"/>
+                            android:text="@string/load"
+                            android:textColor="@color/colorText" />
+
                         <TextView
                             android:id="@+id/ccontact"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="@string/load"
-                            android:textColor="@color/colorText"
+                            android:fontFamily="sans-serif-medium"
                             android:lineSpacingExtra="6dp"
-                            android:fontFamily="sans-serif-medium"/>
+                            android:text="@string/load"
+                            android:textColor="@color/colorText" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>

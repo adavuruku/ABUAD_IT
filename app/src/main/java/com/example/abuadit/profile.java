@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import java.util.Locale;
 public class profile extends Fragment {
     TextView pname,pregno,pfaculty,pemailphone,pcontact,pmodetype,
             sname,sfaculty,semailphone,cname,cemailphone,ccontact,cstatelgov,istart,iend,ileft;
+    CardView companyCard;
     private dbHelper dbHelper;
     private SharedPreferences MyId;
     private OnFragmentInteractionListener mListener;
@@ -62,6 +64,7 @@ public class profile extends Fragment {
         istart = rootView.findViewById(R.id.istart);
         iend = rootView.findViewById(R.id.iend);
         ileft = rootView.findViewById(R.id.ileft);
+        companyCard = rootView.findViewById(R.id.company);
 
         MyId = getActivity().getSharedPreferences("MyId", getActivity().MODE_PRIVATE);
         String userID = MyId.getString("MyId", "");
@@ -129,20 +132,25 @@ public class profile extends Fragment {
                     " / " +  lecturerInfo.getString(lecturerInfo.getColumnIndex(dbColumnList.abuadLecturer.COLUMN_PHONE)));
         }
 
-        //lecturer info
-        Cursor companyInfo = dbHelper.getACompany(companyID);
-        if(companyInfo.getCount() >=1) {
-            companyInfo.moveToFirst();
-            cname.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYNAME)));
+        //Company Info info
+        if (!companyID.equals("ABUAD")){
+            Cursor companyInfo = dbHelper.getACompany(companyID);
+            if(companyInfo.getCount() >=1) {
+                companyInfo.moveToFirst();
+                cname.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYNAME)));
 
-            cemailphone.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL)) +
-                    " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYPHONE)));
+                cemailphone.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL)) +
+                        " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYPHONE)));
 
-            cstatelgov.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYSTATE)) +
-                    " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYLGOV)));
+                cstatelgov.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYSTATE)) +
+                        " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYLGOV)));
 
-            ccontact.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS)));
+                ccontact.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS)));
 
+            }
+        }
+        else{
+            companyCard.setVisibility(View.GONE);
         }
         return rootView;
     }

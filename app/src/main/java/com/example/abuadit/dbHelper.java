@@ -13,9 +13,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class dbHelper extends SQLiteOpenHelper {
     // Database Info
     // Database Info
-    public static final String DATABASE_NAME = "ABUADOOO.db";
+    public static final String DATABASE_NAME = "ABUADOOK.db";
     public static final String DBLOCATION = "/data/data/com.example.abuadit/databases/";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 3;
     private Context mcontext;
     private SQLiteDatabase mdatabase;
 

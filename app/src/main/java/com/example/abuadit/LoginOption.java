@@ -33,7 +33,6 @@ public class LoginOption extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), staffLogin.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                    finish();
                 }else{
                     Intent intent = new Intent(getApplication(), staffHome.class);
                     startActivity(intent);
@@ -53,7 +52,6 @@ public class LoginOption extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                    finish();
                 }else{
                     Intent intent = new Intent(getApplication(), HomeScreen.class);
                     startActivity(intent);
@@ -77,6 +75,7 @@ public class LoginOption extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), companyHome.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
                 }
 
             }

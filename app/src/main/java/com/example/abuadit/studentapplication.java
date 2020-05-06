@@ -292,6 +292,8 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                         }else{
                             dbHelper.saveApplication(userID,companyID,"2");
                             displayMessage("You Have Successfully Accept The Offer. !");
+
+
                         }
                     }
                 },

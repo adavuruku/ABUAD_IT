@@ -131,7 +131,7 @@ public class LoginScreen extends AppCompatActivity {
                         if(pd.isShowing()){
                             pd.hide();
                         }
-                        displayMessage("Error: No Internet Connection !!!");
+                        displayMessage("Error: No Internet Connection !!!" + error);
                     }
                 }
         ) {
@@ -164,7 +164,7 @@ public class LoginScreen extends AppCompatActivity {
                 studentName = jsonobject.getString("studName");
 
                 //empty all existing student record
-                dbHelper.deleteStudent();
+//                dbHelper.deleteStudent();
                 dbHelper.saveStudentInformation(
                         jsonobject.getString("regno"),jsonobject.getString("studName"),
                         jsonobject.getString("studFaculty"),jsonobject.getString("studDept"),
@@ -175,7 +175,7 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("itLevel")
                 );
 
-                dbHelper.deleteLeturer();
+//                dbHelper.deleteLeturer();
                 dbHelper.saveLecturerInformation(
                         jsonobject.getString("staffid"),jsonobject.getString("lecturerName"),
                         jsonobject.getString("lecturerFaculty"),jsonobject.getString("lecturerDept"),
@@ -183,29 +183,38 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("staffaddress")
                 );
 
-                dbHelper.deleteItInformation();
+//                dbHelper.deleteItInformation();
                 dbHelper.saveITInformation(
                         jsonobject.getString("regno"),jsonobject.getString("startDate"),
                         jsonobject.getString("endDate"),jsonobject.getString("duration"),
-                        jsonobject.getString("staffid"),jsonobject.getString("companyId")
+                        jsonobject.getString("staffid"),jsonobject.getString("companyid")
                 );
 
-                dbHelper.deleteCompany();
-                dbHelper.SaveCompanyInformation(
-                        jsonobject.getString("companyName"),jsonobject.getString("companyPhone"),
-                        jsonobject.getString("companyEmail"),jsonobject.getString("companyAddress"),
-                        jsonobject.getString("companyDescription"),jsonobject.getString("companyState"),
-                        jsonobject.getString("companyLocalGov"),jsonobject.getString("companyId")
-                );
+//                if(!(jsonobject.getString("companyid").equals("ABUAD"))){
+//                    //                dbHelper.deleteCompany();
+////                dbHelper.SaveCompanyInformation(
+////                        jsonobject.getString("companyName"),jsonobject.getString("companyPhone"),
+////                        jsonobject.getString("companyEmail"),jsonobject.getString("companyAddress"),
+////                        jsonobject.getString("companyDescription"),jsonobject.getString("companyState"),
+////                        jsonobject.getString("companyLocalGov"),jsonobject.getString("companyId")
+////                );
+//                }
+
+
+
                 String MyPics ="https://abuadit.000webhostapp.com/resource/"+jsonobject.getString("profilePics");
                 Bitmap bitmap =  Picasso.get().load(MyPics).get();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byteArray = stream.toByteArray();
 
+//                Toast.makeText(getApplicationContext(),byteArray +"",Toast.LENGTH_LONG).show();
+
                 dbHelper.deleteProfilePics();
                 dbHelper.saveProfilePics(jsonobject.getString("regno"),
                         byteArray );
+
+
 
                 //empty all other preferences
                 //userID

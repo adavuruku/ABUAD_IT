@@ -282,7 +282,7 @@ public class company extends Fragment {
                             pd.cancel();
                             pd.hide();
                         }
-                        if (response.trim().length()<=2){
+                        if (response.length()<=2){
                             displayMessage("Fail To Create Application. Retry !");
                         }else{
                             dbHelper.saveApplication(userID,companyID,"0");
