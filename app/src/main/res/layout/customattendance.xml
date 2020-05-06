@@ -22,7 +22,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="25dp"
         app:contentPadding="8dp"
         app:layout_anchorGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,6 @@
                 android:lineSpacingExtra="6dp"
                 android:textColor="@color/colorText"
                 android:text="Loading..." />
-
 
 
         </LinearLayout>
