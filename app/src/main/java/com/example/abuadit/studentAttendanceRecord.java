@@ -178,6 +178,9 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
         initNavigationDrawer();
     }
 
+
+
+
     public void volleyJsonArrayRequest(String url){
         String  REQUEST_TAG = "com.volley.volleyJsonArrayRequest";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
