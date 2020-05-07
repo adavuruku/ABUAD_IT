@@ -331,6 +331,13 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
+    public void UpdateStudentItInfo(String regno, String companyId){
+        SQLiteDatabase database = getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(dbColumnList.abuadItInformation.COLUMN_COMPANYID, companyId);
+        database.update(dbColumnList.abuadItInformation.TABLE_NAME, cv, dbColumnList.abuadItInformation.COLUMN_REGNO + "= ?", new String[]{regno});
+    }
+
     public Cursor getAllStaffITStudent(String staffID){
         SQLiteDatabase database = getReadableDatabase();
         return database.query(dbColumnList.abuadItInformation.TABLE_NAME,
@@ -457,6 +464,7 @@ public class dbHelper extends SQLiteOpenHelper {
             database.insert(dbColumnList.applicationList.TABLE_NAME,null,cv);
         }
     }
+
     public Cursor getAllStudentApplication(String regno){
         SQLiteDatabase database = getReadableDatabase();
         return database.query(dbColumnList.applicationList.TABLE_NAME,
@@ -476,7 +484,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,null);
     }
 
-    //delete all student
+    //delete all student Application
     public void deleteApplication(){
         SQLiteDatabase database = getWritableDatabase();
         database.delete(dbColumnList.applicationList.TABLE_NAME,

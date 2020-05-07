@@ -261,12 +261,33 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
             @Override
             public void onNameClick(View v, int position) {
                 companyID =  allNoticeList.get(position).getCompanyId();
-                if (pd.isShowing()){
-                    pd.cancel();
-                    pd.hide();
-                }
-                pd.show();
-                volleyApplicationRequest(address);
+                String companyNameoo =  allNoticeList.get(position).getCompanyName();
+
+                builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are You Sure You Want to Accept the Offer From \n"+companyNameoo +" ... ?. ");
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (pd.isShowing()){
+                            pd.cancel();
+                            pd.hide();
+                        }
+                        pd.show();
+                        volleyApplicationRequest(address);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+                alert.show();
             }
         });
         recyclerAdapter.notifyDataSetChanged();
@@ -292,8 +313,8 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                         }else{
                             dbHelper.saveApplication(userID,companyID,"2");
                             displayMessage("You Have Successfully Accept The Offer. !");
-
-
+                            dbHelper.UpdateStudentItInfo(userID,companyID);
+                            new LoadLocalData().execute();
                         }
                     }
                 },

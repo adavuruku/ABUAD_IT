@@ -61,6 +61,7 @@ public class companyAdapter extends RecyclerView.Adapter<companyAdapter.Recycler
                 }else {
                     holder.appStatus.setVisibility(View.VISIBLE);
                     holder.appStatus.setText("Pending Application");
+                    holder.appStatus.setTextColor(activity.getResources().getColor(R.color.colorBlack));
                     holder.clickApply.setVisibility(View.GONE);
                 }
             }

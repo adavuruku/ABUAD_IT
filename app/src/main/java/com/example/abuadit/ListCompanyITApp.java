@@ -179,13 +179,33 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
             @Override
             public void onNameClick(View v, int position) {
                  regNo =  allNoticeList.get(position).getRegno();
-                if (pd.isShowing()){
-                    pd.cancel();
-                    pd.hide();
-                }
-                pd.show();
-                volleyApplicationRequest(address);
-//                Toast.makeText(getContext(),"Welcome "+ postid + " To ABUAD IT - MOBILE APP",Toast.LENGTH_LONG).show();
+                 String studentNameoo = allNoticeList.get(position).getStudName();
+
+               builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are You Sure You Want to Approve the Application From \n"+studentNameoo +" ... ?. ");
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (pd.isShowing()){
+                            pd.cancel();
+                            pd.hide();
+                        }
+                        pd.show();
+                        volleyApplicationRequest(address);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+                alert.show();
             }
 
             @Override
@@ -222,7 +242,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                         allNoticeList.get(position).getStudEmail() + " / "+ allNoticeList.get(position).getStudPhone()
                 );
 
-                TextView pmodetype = snackView.findViewById(R.id.pemailphone);
+                TextView pmodetype = snackView.findViewById(R.id.pmodetype);
                 pmodetype.setText(
                         allNoticeList.get(position).getMode() + " / "+ allNoticeList.get(position).getDegree()
                 );
@@ -234,8 +254,15 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 
                 TextView pcontact = snackView.findViewById(R.id.pcontact);
                 pcontact.setText(
-                       allNoticeList.get(position).getContactAddress()
+                        allNoticeList.get(position).getContactAddress()
                 );
+
+                TextView pitphoneemail = snackView.findViewById(R.id.pitphoneemail);
+                pitphoneemail.setVisibility(View.GONE);
+                TextView pitaddress = snackView.findViewById(R.id.pitaddress);
+                pitaddress.setVisibility(View.GONE);
+                TextView pit = snackView.findViewById(R.id.pit);
+                pit.setVisibility(View.GONE);
 
                 final Dialog d = new Dialog(getActivity());
                 d.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -243,6 +270,7 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                 d.setContentView(snackView);
                 d.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
                 d.show();
+
             }
         });
         recyclerAdapter.notifyDataSetChanged();

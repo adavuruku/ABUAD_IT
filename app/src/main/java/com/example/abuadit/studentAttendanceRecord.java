@@ -317,11 +317,12 @@ String address = "https://abuadit.000webhostapp.com/abuadrest.php";
                         overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         finish();
                         break;
-                    case R.id.register:
-//                        intent = new Intent(getApplicationContext(), studentAttendanceRecord.class);
-//                        startActivity(intent);
-//                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
-//                        break;
+                    case R.id.home:
+                        intent = new Intent(getApplicationContext(), HomeScreen.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                        break;
                     case R.id.website:
                         Intent i = new Intent(
                                 Intent.ACTION_VIEW,

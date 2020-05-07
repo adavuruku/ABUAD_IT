@@ -116,10 +116,10 @@ public class LoginScreen extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.length()<=2){
-                            displayMessage("Error: Wrong Username Or Password !!!");
+                            displayMessage("Error: Is Either Your Account is Yet to be ACTIVATED \n" +
+                                    "By The IT Department OR \nYour Username Or Password Are Invalid!!!");
                         }else{
                             allResult = response;
-//                            Toast.makeText(getApplicationContext(), response ,Toast.LENGTH_LONG).show();
                             new ReadJSON().execute();
                         }
                     }
@@ -164,7 +164,7 @@ public class LoginScreen extends AppCompatActivity {
                 studentName = jsonobject.getString("studName");
 
                 //empty all existing student record
-//                dbHelper.deleteStudent();
+                dbHelper.deleteStudent();
                 dbHelper.saveStudentInformation(
                         jsonobject.getString("regno"),jsonobject.getString("studName"),
                         jsonobject.getString("studFaculty"),jsonobject.getString("studDept"),
@@ -175,7 +175,7 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("itLevel")
                 );
 
-//                dbHelper.deleteLeturer();
+                dbHelper.deleteLeturer();
                 dbHelper.saveLecturerInformation(
                         jsonobject.getString("staffid"),jsonobject.getString("lecturerName"),
                         jsonobject.getString("lecturerFaculty"),jsonobject.getString("lecturerDept"),
@@ -183,7 +183,7 @@ public class LoginScreen extends AppCompatActivity {
                         jsonobject.getString("staffaddress")
                 );
 
-//                dbHelper.deleteItInformation();
+                dbHelper.deleteItInformation();
                 dbHelper.saveITInformation(
                         jsonobject.getString("regno"),jsonobject.getString("startDate"),
                         jsonobject.getString("endDate"),jsonobject.getString("duration"),

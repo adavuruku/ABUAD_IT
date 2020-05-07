@@ -4,22 +4,35 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class profile extends Fragment {
@@ -29,8 +42,8 @@ public class profile extends Fragment {
     private dbHelper dbHelper;
     private SharedPreferences MyId;
     private OnFragmentInteractionListener mListener;
-    String companyID, staffID;
-
+    String companyID, staffID,userID,allResult;
+    String address = "https://abuadit.000webhostapp.com/abuadrest.php";
 
     public profile() {
         // Required empty public constructor
@@ -67,9 +80,18 @@ public class profile extends Fragment {
         companyCard = rootView.findViewById(R.id.company);
 
         MyId = getActivity().getSharedPreferences("MyId", getActivity().MODE_PRIVATE);
-        String userID = MyId.getString("MyId", "");
+         userID = MyId.getString("MyId", "");
         //retrieve student information
         dbHelper = new dbHelper(getContext());
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                volleyJsonArrayRequest(address);
+            }
+        },2000);
+
 
         Cursor studentInfo = dbHelper.getAStudent(userID);
         if(studentInfo.getCount() >=1) {
@@ -94,7 +116,6 @@ public class profile extends Fragment {
         Cursor ITInfo = dbHelper.getAStudentItInfo(userID);
         if(ITInfo.getCount() >=1) {
             ITInfo.moveToFirst();
-            companyID = ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_COMPANYID));
             staffID = ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_STAFFID));
             if(ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART)).length() > 0){
 
@@ -112,8 +133,17 @@ public class profile extends Fragment {
 
                 String dateDif = monthsBetweenDates(END);
                 ileft.setText("Left : " + dateDif);
-                istart.setText("Start Date : " + ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART)));
-                iend.setText("End Date : " +ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATEEND)));
+
+                    Date START = sdf.parse(
+                            ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_DATESTART))
+                    );
+
+
+                    String DATE_FORMATTWO= "EEE, dd MMMM yyyy";
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMATTWO);
+
+                istart.setText("Start Date : " + dateFormat.format(START));
+                iend.setText("End Date : " + dateFormat.format(END));
 
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -132,27 +162,42 @@ public class profile extends Fragment {
                     " / " +  lecturerInfo.getString(lecturerInfo.getColumnIndex(dbColumnList.abuadLecturer.COLUMN_PHONE)));
         }
 
-        //Company Info info
-        if (!companyID.equals("ABUAD")){
-            Cursor companyInfo = dbHelper.getACompany(companyID);
-            if(companyInfo.getCount() >=1) {
-                companyInfo.moveToFirst();
-                cname.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYNAME)));
+        //load company if one exist.
+        checkCompanyAccepted();
+        return rootView;
+    }
 
-                cemailphone.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL)) +
-                        " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYPHONE)));
 
-                cstatelgov.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYSTATE)) +
-                        " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYLGOV)));
+    public void checkCompanyAccepted(){
+        Cursor ITInfo = dbHelper.getAStudentItInfo(userID);
 
-                ccontact.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS)));
+        if(ITInfo.getCount() >=1) {
+            ITInfo.moveToFirst();
+            companyID = ITInfo.getString(ITInfo.getColumnIndex(dbColumnList.abuadItInformation.COLUMN_COMPANYID));
 
+            if (!companyID.equals("ABUAD")){
+                Cursor companyInfo = dbHelper.getACompany(companyID);
+                if(companyInfo.getCount() >=1) {
+                    companyCard.setVisibility(View.VISIBLE);
+                    companyInfo.moveToFirst();
+                    cname.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYNAME)));
+
+                    cemailphone.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYEMAIL)) +
+                            " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYPHONE)));
+
+                    cstatelgov.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYSTATE)) +
+                            " / " +  companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYLGOV)));
+
+                    ccontact.setText(companyInfo.getString(companyInfo.getColumnIndex(dbColumnList.abuadCompany.COLUMN_COMPANYADDRESS)));
+
+                }else{
+                    companyCard.setVisibility(View.GONE);
+                }
+            }
+            else{
+                companyCard.setVisibility(View.GONE);
             }
         }
-        else{
-            companyCard.setVisibility(View.GONE);
-        }
-        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -190,16 +235,89 @@ public class profile extends Fragment {
         date2.set(tYear, tMonth, tDay);
 
         long diff = date1.getTimeInMillis() - date2.getTimeInMillis();
-        int dayCount,monthCount,weekCount;
-        dayCount = (int) (diff / (24 * 60 * 60 * 1000));
-        weekCount = (int) (diff / (7 * 24 * 60 * 60 * 1000));
-        weekCount += (diff % (7 * 24 * 60 * 60 * 1000)) > 0 ? 1:0;
-        monthCount = (int) (diff / (2419200000f));
-        monthCount += (diff % (2419200000f)) > 0 ? 1:0;
+        int dayCount=0;int monthCount=0;int weekCount=0;
 
+        monthCount = (int) (diff / (2419200000f));
+        if((diff % (2419200000f)) > 0){
+            float weekdiff = diff - (monthCount*(2419200000f));
+            weekCount = (int)(weekdiff/(7 * 24 * 60 * 60 * 1000));
+
+            if (weekdiff % (7 * 24 * 60 * 60 * 1000) > 0 ){
+                float daydiff = weekdiff - (weekCount * (7 * 24 * 60 * 60 * 1000));
+                dayCount = (int) (daydiff / (24 * 60 * 60 * 1000));
+                dayCount += (daydiff % (24 * 60 * 60 * 1000)) > 0 ? 1:0;
+            }
+        }
 
         return monthCount +" Months, " + weekCount +" Weeks, " + dayCount +" Days";
     }
+
+
+
+    //load all available company in profile as well
+
+    public void volleyJsonArrayRequest(String url){
+        String  REQUEST_TAG = "com.volley.volleyJsonArrayRequest";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.length()>2){
+                            allResult = response;
+                            new ReadJSON().execute();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("opr", "loadCompany");
+                return params;
+            }
+        };
+        AppSingleton.getInstance(getContext()).addToRequestQueue(postRequest, REQUEST_TAG);
+    }
+
+    class ReadJSON extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                dbHelper = new dbHelper(getContext());
+                JSONArray jsonarray = new JSONArray(allResult);
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                    dbHelper.SaveCompanyInformation(
+                            jsonobject.getString("companyName"),jsonobject.getString("companyPhone"),
+                            jsonobject.getString("companyEmail"),jsonobject.getString("companyAddress"),
+                            jsonobject.getString("companyDescription"),jsonobject.getString("companyState"),
+                            jsonobject.getString("companyLocalGov"),jsonobject.getString("companyId")
+                    );
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+
+            super.onPostExecute(s);
+        }
+    }
+
+
 
 
     @Override

@@ -255,13 +255,36 @@ public class company extends Fragment {
         recyclerAdapter = new companyAdapter( allNoticeList, getContext(), new companyAdapter.OnItemClickListener() {
             @Override
             public void onNameClick(View v, int position) {
-                 companyID =  allNoticeList.get(position).getCompanyId();
-                if (pd.isShowing()){
-                    pd.cancel();
-                    pd.hide();
-                }
-                pd.show();
-                 volleyApplicationRequest(address);
+
+                companyID =  allNoticeList.get(position).getCompanyId();
+                String companyNameoo =  allNoticeList.get(position).getCompanyName();
+
+                builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are You Sure You Want to Apply For IT Placement At \n"+companyNameoo +" ... ?. ");
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (pd.isShowing()){
+                            pd.cancel();
+                            pd.hide();
+                        }
+                        pd.show();
+                        volleyApplicationRequest(address);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+                alert.show();
+
             }
         });
         recyclerAdapter.notifyDataSetChanged();
@@ -286,7 +309,7 @@ public class company extends Fragment {
                             displayMessage("Fail To Create Application. Retry !");
                         }else{
                             dbHelper.saveApplication(userID,companyID,"0");
-                            displayMessage("Application Created Successfully. !" + response);
+                            displayMessage("Application Created Successfully. !");
                         }
                     }
                 },

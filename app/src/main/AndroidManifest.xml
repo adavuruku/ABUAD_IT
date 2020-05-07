@@ -14,33 +14,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".staffHome"></activity>
-        <activity android:name=".staffLogin" />
-        <activity android:name=".studentAttendanceRecord" />
-        <activity android:name=".CompanyRegister" />
-        <activity android:name=".companyHome" />
+        <activity android:name=".staffHome"
+            android:screenOrientation = "portrait"
+            />
+        <activity android:name=".staffLogin"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".studentAttendanceRecord"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".CompanyRegister"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".companyHome"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".CompanyLogin"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".LoginOption"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".StudentCompany"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".readNotice"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".LoginScreen"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".about" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".about"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation = "portrait"/>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation = "portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
